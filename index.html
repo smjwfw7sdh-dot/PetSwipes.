@@ -9,6 +9,7 @@
   <style>
     :root {
       --rojo: #C41E3A;
+      --rojo-claro: #E5394D;
       --verde: #2E7D32;
       --gris-suave: #F5F5F7;
       --gris-texto: #6B7280;
@@ -17,11 +18,7 @@
       --sombra: 0 4px 20px rgba(0,0,0,0.08);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -33,7 +30,6 @@
       padding: 20px;
     }
 
-    /* Marco del iPhone */
     .phone {
       width: 390px;
       height: 844px;
@@ -56,7 +52,6 @@
       flex-direction: column;
     }
 
-    /* Notch */
     .notch {
       position: absolute;
       top: 0;
@@ -69,7 +64,6 @@
       z-index: 100;
     }
 
-    /* Status bar */
     .status-bar {
       height: 50px;
       display: flex;
@@ -83,7 +77,6 @@
       z-index: 50;
     }
 
-    /* Pantallas */
     .screen {
       display: none;
       flex: 1;
@@ -91,72 +84,79 @@
       overflow-y: auto;
       background: var(--blanco);
       position: relative;
+      padding-bottom: 70px;
     }
 
-    .screen.active {
-      display: flex;
-    }
+    .screen.active { display: flex; }
 
     /* ===== SPLASH ===== */
     .splash {
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 40px 30px;
-      background: linear-gradient(180deg, #FFF5F5 0%, #FFFFFF 100%);
+      padding: 40px 28px;
+      background: linear-gradient(180deg, #FFF5F5 0%, #FFFFFF 70%);
     }
 
-    .splash .logo {
-      width: 90px;
-      height: 90px;
-      background: var(--rojo);
-      border-radius: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(196, 30, 58, 0.25);
+    .logo-container {
+      margin-bottom: 20px;
     }
 
-    .splash .logo svg {
-      width: 50px;
-      height: 50px;
-      fill: white;
+    .logo-svg {
+      width: 140px;
+      height: 140px;
     }
 
     .splash h1 {
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 700;
       color: var(--rojo);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
     }
 
-    .splash p {
-      font-size: 16px;
+    .value-prop {
+      font-size: 15px;
       color: var(--gris-texto);
-      margin-bottom: 48px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      max-width: 280px;
     }
 
-    .btn-primary {
+    .btn-paw {
       background: var(--rojo);
       color: white;
       border: none;
-      padding: 16px 32px;
-      border-radius: 16px;
-      font-size: 17px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      font-size: 15px;
       font-weight: 600;
-      width: 100%;
-      max-width: 280px;
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 14px rgba(196, 30, 58, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      box-shadow: 0 8px 25px rgba(196, 30, 58, 0.35);
+      transition: transform 0.15s;
+      position: relative;
     }
 
-    .btn-primary:active {
-      transform: scale(0.98);
+    .btn-paw:active { transform: scale(0.95); }
+
+    .btn-paw svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
     }
 
-    /* ===== HEADER COMÚN ===== */
+    .btn-paw span {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ===== HEADER ===== */
     .header {
       padding: 12px 20px 16px;
       background: var(--blanco);
@@ -185,12 +185,48 @@
       flex: 1;
     }
 
-    /* ===== FORMULARIO ESTILO DE VIDA ===== */
+    /* ===== FORMULARIO ===== */
     .form-content {
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 18px;
+    }
+
+    .photo-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .photo-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--gris-suave);
+      border: 3px dashed #D1D5DB;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gris-texto);
+      font-size: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-circle span {
+      font-size: 24px;
+      margin-bottom: 2px;
     }
 
     .form-group label {
@@ -213,7 +249,6 @@
       background: var(--blanco);
       color: var(--texto);
       outline: none;
-      transition: border-color 0.2s;
     }
 
     .form-group input:focus,
@@ -256,6 +291,21 @@
       border-top: 1px solid #F3F4F6;
     }
 
+    .btn-primary {
+      background: var(--rojo);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 16px;
+      font-size: 17px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(196, 30, 58, 0.3);
+    }
+
+    .btn-primary:active { transform: scale(0.98); }
+
     /* ===== MATCHES ===== */
     .matches-list {
       padding: 16px 20px;
@@ -264,12 +314,19 @@
       gap: 16px;
     }
 
+    .matches-header {
+      padding: 0 20px 8px;
+      font-size: 14px;
+      color: var(--gris-texto);
+    }
+
     .pet-card {
       background: var(--blanco);
       border-radius: 20px;
       overflow: hidden;
       box-shadow: var(--sombra);
       border: 1px solid #F3F4F6;
+      cursor: pointer;
     }
 
     .pet-card img {
@@ -278,9 +335,7 @@
       object-fit: cover;
     }
 
-    .pet-card-body {
-      padding: 16px;
-    }
+    .pet-card-body { padding: 16px; }
 
     .pet-card-header {
       display: flex;
@@ -331,16 +386,14 @@
       font-weight: 700;
     }
 
-    /* ===== DETALLE MASCOTA ===== */
+    /* ===== DETALLE ===== */
     .detail-hero {
       width: 100%;
       height: 280px;
       object-fit: cover;
     }
 
-    .detail-content {
-      padding: 20px;
-    }
+    .detail-content { padding: 20px; }
 
     .detail-title {
       font-size: 26px;
@@ -365,9 +418,7 @@
       font-weight: 500;
     }
 
-    .section {
-      margin-bottom: 20px;
-    }
+    .section { margin-bottom: 20px; }
 
     .section h4 {
       font-size: 15px;
@@ -382,9 +433,7 @@
       line-height: 1.5;
     }
 
-    .section ul {
-      list-style: none;
-    }
+    .section ul { list-style: none; }
 
     .section li {
       display: flex;
@@ -399,7 +448,7 @@
       font-weight: 700;
     }
 
-    /* ===== PROCESO ADOPCIÓN ===== */
+    /* ===== PROCESO ===== */
     .process-content {
       padding: 30px 24px;
       text-align: center;
@@ -470,11 +519,7 @@
       font-size: 14px;
     }
 
-    .step.active .step-circle {
-      background: var(--verde);
-      color: white;
-    }
-
+    .step.active .step-circle,
     .step.completed .step-circle {
       background: var(--verde);
       color: white;
@@ -486,10 +531,7 @@
       font-weight: 500;
     }
 
-    .step.active span {
-      color: var(--verde);
-      font-weight: 600;
-    }
+    .step.active span { color: var(--verde); font-weight: 600; }
 
     .info-box {
       background: #F0FDF4;
@@ -501,10 +543,8 @@
       line-height: 1.5;
     }
 
-    /* ===== SEGUIMIENTO ===== */
-    .follow-content {
-      padding: 24px 20px;
-    }
+    /* ===== SEGUIMIENTO + CONTACTO ===== */
+    .follow-content { padding: 24px 20px; }
 
     .timeline-item {
       display: flex;
@@ -556,7 +596,55 @@
       color: var(--gris-texto);
     }
 
-    /* ===== HOME / PERFIL ===== */
+    .contact-section {
+      background: #FFF5F5;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 10px;
+    }
+
+    .contact-section h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--texto);
+    }
+
+    .contact-section > p {
+      font-size: 13px;
+      color: var(--gris-texto);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .contact-section input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 12px;
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+
+    .contact-section input:focus {
+      outline: none;
+      border-color: var(--rojo);
+    }
+
+    .btn-contact {
+      background: var(--rojo);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* ===== HOME ===== */
     .profile-header {
       padding: 24px 20px;
       text-align: center;
@@ -622,11 +710,13 @@
     .mini-pets {
       display: flex;
       gap: 10px;
+      overflow-x: auto;
     }
 
     .mini-pet {
       width: 60px;
       text-align: center;
+      flex-shrink: 0;
     }
 
     .mini-pet img {
@@ -642,7 +732,7 @@
       color: var(--gris-texto);
     }
 
-    /* Navegación inferior del prototipo */
+    /* Navegación prototipo */
     .proto-nav {
       position: absolute;
       bottom: 0;
@@ -673,11 +763,6 @@
       background: var(--rojo);
       color: white;
     }
-
-    /* Ajuste para que el contenido no quede detrás del nav */
-    .screen {
-      padding-bottom: 60px;
-    }
   </style>
 </head>
 <body>
@@ -693,16 +778,43 @@
         <span>●●●● WiFi</span>
       </div>
       <div class="splash">
-        <div class="logo">
-          <svg viewBox="0 0 24 24"><path d="M12 2C10.9 2 10 2.9 10 4C10 5.1 10.9 6 12 6C13.1 6 14 5.1 14 4C14 2.9 13.1 2 12 2ZM8.5 6C7.12 6 6 7.12 6 8.5C6 9.88 7.12 11 8.5 11C9.88 11 11 9.88 11 8.5C11 7.12 9.88 6 8.5 6ZM15.5 6C14.12 6 13 7.12 13 8.5C13 9.88 14.12 11 15.5 11C16.88 11 18 9.88 18 8.5C18 7.12 16.88 6 15.5 6ZM4.5 11C3.12 11 2 12.12 2 13.5C2 14.88 3.12 16 4.5 16C5.88 16 7 14.88 7 13.5C7 12.12 5.88 11 4.5 11ZM19.5 11C18.12 11 17 12.12 17 13.5C17 14.88 18.12 16 19.5 16C20.88 16 22 14.88 22 13.5C22 12.12 20.88 11 19.5 11ZM12 13C9.24 13 7 15.24 7 18V20H17V18C17 15.24 14.76 13 12 13Z"/></svg>
+        <div class="logo-container">
+          <!-- Logo aproximado al que te gusta -->
+          <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Corazón -->
+            <path d="M100 170 C40 120 10 80 40 50 C60 30 85 40 100 60 C115 40 140 30 160 50 C190 80 160 120 100 170 Z" fill="#E5394D"/>
+            <!-- Perro (izquierda) -->
+            <ellipse cx="75" cy="95" rx="28" ry="32" fill="#C41E3A"/>
+            <circle cx="65" cy="85" r="8" fill="#C41E3A"/>
+            <ellipse cx="58" cy="88" rx="6" ry="4" fill="#C41E3A"/>
+            <!-- Gato (derecha) -->
+            <ellipse cx="125" cy="100" rx="22" ry="28" fill="#B71C1C"/>
+            <polygon points="112,75 118,90 106,90" fill="#B71C1C"/>
+            <polygon points="138,75 132,90 144,90" fill="#B71C1C"/>
+            <!-- Huella -->
+            <ellipse cx="100" cy="145" rx="14" ry="11" fill="white"/>
+            <circle cx="90" cy="135" r="5" fill="white"/>
+            <circle cx="100" cy="131" r="5" fill="white"/>
+            <circle cx="110" cy="135" r="5" fill="white"/>
+            <circle cx="95" cy="128" r="4" fill="white"/>
+            <!-- Flecha -->
+            <path d="M130 155 Q150 145 160 130" stroke="#C41E3A" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <polygon points="160 125 168 138 152 135" fill="#C41E3A"/>
+          </svg>
         </div>
         <h1>PetSwipe</h1>
-        <p>Matching responsable de mascotas</p>
-        <button class="btn-primary" onclick="goTo(2)">Comenzar</button>
+        <p class="value-prop">
+          Matching responsable de perros y gatos.<br>
+          Compatibilidad real de estilo de vida + acompañamiento post-adopción.
+        </p>
+        <button class="btn-paw" onclick="goTo(2)">
+          <svg viewBox="0 0 24 24"><path d="M12 2C10.9 2 10 2.9 10 4C10 5.1 10.9 6 12 6C13.1 6 14 5.1 14 4C14 2.9 13.1 2 12 2ZM8.5 6C7.12 6 6 7.12 6 8.5C6 9.88 7.12 11 8.5 11C9.88 11 11 9.88 11 8.5C11 7.12 9.88 6 8.5 6ZM15.5 6C14.12 6 13 7.12 13 8.5C13 9.88 14.12 11 15.5 11C16.88 11 18 9.88 18 8.5C18 7.12 16.88 6 15.5 6ZM4.5 11C3.12 11 2 12.12 2 13.5C2 14.88 3.12 16 4.5 16C5.88 16 7 14.88 7 13.5C7 12.12 5.88 11 4.5 11ZM19.5 11C18.12 11 17 12.12 17 13.5C17 14.88 18.12 16 19.5 16C20.88 16 22 14.88 22 13.5C22 12.12 20.88 11 19.5 11ZM12 13C9.24 13 7 15.24 7 18V20H17V18C17 15.24 14.76 13 12 13Z"/></svg>
+          <span>Comenzar</span>
+        </button>
       </div>
     </div>
 
-    <!-- ==================== 2. FORMULARIO ESTILO DE VIDA ==================== -->
+    <!-- ==================== 2. FORMULARIO ==================== -->
     <div class="screen" id="screen-2">
       <div class="status-bar">
         <span>9:41</span>
@@ -713,24 +825,33 @@
         <h2>Tu estilo de vida</h2>
       </div>
       <div class="form-content">
+        <!-- Foto de cara -->
+        <div class="photo-upload">
+          <div class="photo-circle" onclick="alert('En una versión real aquí se abriría la cámara o galería')">
+            <span>📷</span>
+            Subir foto
+          </div>
+          <small style="color:var(--gris-texto);font-size:12px;">Foto de tu cara (obligatoria)</small>
+        </div>
+
         <div class="form-group">
           <label>Edad</label>
-          <input type="number" placeholder="Ej: 28" value="28">
+          <input type="number" id="edad" placeholder="Ej: 28" value="28">
         </div>
         <div class="form-group">
           <label>Ciudad / Comuna</label>
-          <input type="text" value="Talca, Maule">
+          <input type="text" id="ciudad" value="Talca, Maule">
         </div>
         <div class="form-group">
           <label>Tipo de vivienda</label>
           <div class="radio-group">
-            <div class="radio-option active" onclick="selectRadio(this)">Casa</div>
-            <div class="radio-option" onclick="selectRadio(this)">Departamento</div>
+            <div class="radio-option active" data-value="casa" onclick="selectRadio(this)">Casa</div>
+            <div class="radio-option" data-value="depto" onclick="selectRadio(this)">Departamento</div>
           </div>
         </div>
         <div class="form-group">
           <label>Ingreso líquido aproximado</label>
-          <select>
+          <select id="ingreso">
             <option>$400.000 - $600.000</option>
             <option selected>$600.000 - $900.000</option>
             <option>$900.000 - $1.200.000</option>
@@ -738,24 +859,24 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Horas semanales disponibles para la mascota</label>
-          <input type="number" value="15" placeholder="Ej: 12">
+          <label>Horas semanales disponibles</label>
+          <input type="number" id="horas" value="15" placeholder="Ej: 12">
         </div>
         <div class="form-group">
           <label>¿Qué buscas en una mascota?</label>
-          <textarea>Compañía, alguien tranquilo que se adapte a mi rutina de trabajo</textarea>
+          <textarea id="buscas">Compañía, alguien tranquilo que se adapte a mi rutina</textarea>
         </div>
         <div class="form-group">
-          <label>¿Qué puedes ofrecerle a la mascota?</label>
-          <textarea>Tiempo de calidad, paseos diarios, alimentación balanceada y mucho cariño</textarea>
+          <label>¿Qué puedes ofrecerle?</label>
+          <textarea id="ofreces">Tiempo de calidad, paseos diarios y mucho cariño</textarea>
         </div>
       </div>
       <div class="btn-fixed">
-        <button class="btn-primary" onclick="goTo(3)">Ver mis matches</button>
+        <button class="btn-primary" onclick="generarMatches()">Ver mis matches</button>
       </div>
     </div>
 
-    <!-- ==================== 3. RESULTADOS MATCHING ==================== -->
+    <!-- ==================== 3. MATCHES ==================== -->
     <div class="screen" id="screen-3">
       <div class="status-bar">
         <span>9:41</span>
@@ -765,83 +886,37 @@
         <div class="back" onclick="goTo(2)">←</div>
         <h2>Tus matches compatibles</h2>
       </div>
-      <div class="matches-list">
-        <!-- Card 1 -->
-        <div class="pet-card" onclick="goTo(4)">
-          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop" alt="Max">
-          <div class="pet-card-body">
-            <div class="pet-card-header">
-              <h3>Max</h3>
-              <span class="compat">94% compatible</span>
-            </div>
-            <div class="pet-meta">3 años · Macho · Mediano</div>
-            <div class="pet-desc">Tranquilo, sociable y muy cariñoso. Ideal para familias o personas que buscan compañía leal.</div>
-            <div class="fundacion">Fundación Huellitas Talca</div>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="pet-card">
-          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop" alt="Luna">
-          <div class="pet-card-body">
-            <div class="pet-card-header">
-              <h3>Luna</h3>
-              <span class="compat">89% compatible</span>
-            </div>
-            <div class="pet-meta">2 años · Hembra · Pequeña</div>
-            <div class="pet-desc">Juguetona y curiosa. Se adapta muy bien a departamentos y es ideal para dueños primerizos.</div>
-            <div class="fundacion">Protectora Animal Maule</div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="pet-card">
-          <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=400&fit=crop" alt="Toby">
-          <div class="pet-card-body">
-            <div class="pet-card-header">
-              <h3>Toby</h3>
-              <span class="compat">87% compatible</span>
-            </div>
-            <div class="pet-meta">4 años · Macho · Grande</div>
-            <div class="pet-desc">Energético y leal. Perfecto para personas activas que disfrutan de paseos largos.</div>
-            <div class="fundacion">Fundación Amigos de los Animales</div>
-          </div>
-        </div>
+      <div class="matches-header" id="matches-count">Mostrando matches según tu perfil...</div>
+      <div class="matches-list" id="matches-container">
+        <!-- Se llena dinámicamente -->
       </div>
     </div>
 
-    <!-- ==================== 4. DETALLE MASCOTA ==================== -->
+    <!-- ==================== 4. DETALLE ==================== -->
     <div class="screen" id="screen-4">
       <div class="status-bar">
         <span>9:41</span>
         <span>●●●● WiFi</span>
       </div>
-      <img class="detail-hero" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=600&fit=crop" alt="Max">
+      <img class="detail-hero" id="detail-img" src="" alt="Mascota">
       <div class="detail-content">
-        <div class="detail-title">Max</div>
-        <div class="detail-tags">
-          <span class="tag">3 años</span>
-          <span class="tag">Macho</span>
-          <span class="tag">Mediano</span>
-          <span class="tag" style="background:#E8F5E9;color:var(--verde)">94% match</span>
-        </div>
+        <div class="detail-title" id="detail-name">Max</div>
+        <div class="detail-tags" id="detail-tags"></div>
 
         <div class="section">
           <h4>Temperamento</h4>
-          <p>Tranquilo, sociable y muy cariñoso. Se lleva bien con personas y otros perros. Ideal para dueños que buscan compañía leal sin excesiva energía.</p>
+          <p id="detail-temp">Tranquilo, sociable y muy cariñoso.</p>
         </div>
 
         <div class="section">
           <h4>Convivencia</h4>
-          <ul>
-            <li>Compatible con niños</li>
-            <li>Se lleva bien con otras mascotas</li>
-            <li>Adaptado a casa con patio</li>
-          </ul>
+          <ul id="detail-convivencia"></ul>
         </div>
 
         <div class="section">
           <h4>Estado de salud</h4>
           <ul>
-            <li>Esterilizado</li>
+            <li>Esterilizado / Castrado</li>
             <li>Vacunas al día</li>
             <li>Microchip instalado</li>
             <li>Desparasitado</li>
@@ -850,12 +925,12 @@
 
         <div class="section">
           <h4>Su historia</h4>
-          <p>Max llegó a la fundación hace 4 meses. Es un perro rescatado de la calle que ha demostrado ser extremadamente agradecido y leal. Está listo para encontrar su hogar definitivo.</p>
+          <p id="detail-historia">Historia de la mascota...</p>
         </div>
 
         <div class="section">
           <h4>Publicado por</h4>
-          <p style="color:var(--verde);font-weight:500">✓ Fundación Huellitas Talca</p>
+          <p style="color:var(--verde);font-weight:500" id="detail-fundacion">✓ Fundación</p>
         </div>
       </div>
       <div class="btn-fixed">
@@ -863,7 +938,7 @@
       </div>
     </div>
 
-    <!-- ==================== 5. PROCESO DE ADOPCIÓN ==================== -->
+    <!-- ==================== 5. PROCESO ==================== -->
     <div class="screen" id="screen-5">
       <div class="status-bar">
         <span>9:41</span>
@@ -876,7 +951,7 @@
       <div class="process-content">
         <div class="success-icon">🎉</div>
         <h2>¡Match exitoso!</h2>
-        <p>Has iniciado el proceso con Max</p>
+        <p>Has iniciado el proceso con <strong id="proceso-nombre">Max</strong></p>
 
         <div class="steps">
           <div class="step completed">
@@ -898,8 +973,8 @@
         </div>
 
         <div class="info-box">
-          <strong>PetSwipe + Fundación Huellitas</strong><br>
-          Te acompañamos en todo el proceso. En las próximas 24 horas la fundación se contactará contigo para coordinar una visita. Recuerda que el objetivo es asegurar el mejor hogar posible para Max.
+          <strong>PetSwipe + la fundación</strong><br>
+          Te acompañamos en todo el proceso. En las próximas 24 horas la fundación se contactará contigo para coordinar una visita.
         </div>
       </div>
       <div class="btn-fixed">
@@ -907,7 +982,7 @@
       </div>
     </div>
 
-    <!-- ==================== 6. SEGUIMIENTO POST-ADOPCIÓN ==================== -->
+    <!-- ==================== 6. SEGUIMIENTO + CONTACTO ==================== -->
     <div class="screen" id="screen-6">
       <div class="status-bar">
         <span>9:41</span>
@@ -926,7 +1001,7 @@
           <div class="timeline-dot">✓</div>
           <div class="timeline-body">
             <h4>Mes 1 – Completado</h4>
-            <p>Primera visita de seguimiento realizada. Max se está adaptando muy bien a su nuevo hogar.</p>
+            <p>Primera visita de seguimiento realizada.</p>
           </div>
         </div>
 
@@ -934,7 +1009,7 @@
           <div class="timeline-dot">3</div>
           <div class="timeline-body">
             <h4>Mes 3 – Próximo</h4>
-            <p>Programado para el 15 de enero. Te contactaremos para coordinar la visita.</p>
+            <p>Programado. Te contactaremos para coordinar.</p>
           </div>
         </div>
 
@@ -942,18 +1017,24 @@
           <div class="timeline-dot">6</div>
           <div class="timeline-body">
             <h4>Mes 6 – Pendiente</h4>
-            <p>Evaluación final de adaptación y cierre del proceso de acompañamiento.</p>
+            <p>Evaluación final de adaptación.</p>
           </div>
         </div>
 
-        <div class="info-box" style="margin-top:10px;">
-          <strong>¿Necesitas apoyo?</strong><br>
-          Estamos disponibles para orientarte en cualquier momento. Escríbenos o agenda una llamada con el equipo de la fundación.
+        <!-- Formulario de contacto -->
+        <div class="contact-section">
+          <h4>¿Necesitas apoyo?</h4>
+          <p>Déjanos tu teléfono y correo. Nos contactaremos contigo o con la fundación entre <strong>24 a 48 horas</strong> para conversar y apoyarte.</p>
+          
+          <input type="tel" id="telefono" placeholder="Número de teléfono (ej: +56 9 1234 5678)">
+          <input type="email" id="correo" placeholder="Correo electrónico">
+          
+          <button class="btn-contact" onclick="enviarContacto()">Solicitar contacto</button>
         </div>
       </div>
     </div>
 
-    <!-- ==================== 7. PERFIL / HOME ==================== -->
+    <!-- ==================== 7. HOME ==================== -->
     <div class="screen" id="screen-7">
       <div class="status-bar">
         <span>9:41</span>
@@ -966,37 +1047,21 @@
       </div>
       <div class="home-cards">
         <div class="home-card">
-          <h3>Matches guardados <span class="count">3</span></h3>
-          <div class="mini-pets">
-            <div class="mini-pet">
-              <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100&h=100&fit=crop" alt="Max">
-              <span>Max 94%</span>
-            </div>
-            <div class="mini-pet">
-              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=100&h=100&fit=crop" alt="Luna">
-              <span>Luna 89%</span>
-            </div>
-            <div class="mini-pet">
-              <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=100&h=100&fit=crop" alt="Toby">
-              <span>Toby 87%</span>
-            </div>
+          <h3>Matches guardados <span class="count" id="home-count">0</span></h3>
+          <div class="mini-pets" id="home-minis">
+            <!-- se llena dinámicamente -->
           </div>
         </div>
 
         <div class="home-card">
           <h3>Adopciones en proceso <span class="count">1</span></h3>
           <div style="display:flex;align-items:center;gap:12px;">
-            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=60&h=60&fit=crop" style="width:50px;height:50px;border-radius:12px;object-fit:cover;" alt="Max">
+            <div style="width:50px;height:50px;border-radius:12px;background:#eee;"></div>
             <div>
-              <div style="font-weight:600;font-size:14px;">Max</div>
+              <div style="font-weight:600;font-size:14px;" id="home-proceso-nombre">—</div>
               <div style="font-size:12px;color:var(--gris-texto);">Etapa: Contacto con fundación</div>
             </div>
           </div>
-        </div>
-
-        <div class="home-card">
-          <h3>Seguimiento activo</h3>
-          <p style="font-size:13px;color:var(--gris-texto);">Próxima visita programada: 15 de enero</p>
         </div>
       </div>
     </div>
@@ -1015,26 +1080,16 @@
 </div>
 
 <script>
-  function goTo(num) {
-    // Ocultar todas las pantallas
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    // Mostrar la seleccionada
-    document.getElementById('screen-' + num).classList.add('active');
-    
-    // Actualizar botones de navegación
-    document.querySelectorAll('.proto-nav button').forEach((btn, i) => {
-      btn.classList.toggle('active', i + 1 === num);
-    });
-    
-    // Scroll al top
-    document.getElementById('screen-' + num).scrollTop = 0;
-  }
-
-  function selectRadio(el) {
-    el.parentElement.querySelectorAll('.radio-option').forEach(o => o.classList.remove('active'));
-    el.classList.add('active');
-  }
-</script>
-
-</body>
-</html>
+  // Pool de 18 mascotas inventadas
+  const mascotas = [
+    { nombre: "Max", edad: "3 años", sexo: "Macho", tamano: "Mediano", tipo: "perro", compat: 94, img: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop", desc: "Tranquilo, sociable y muy cariñoso. Ideal para familias.", temp: "Tranquilo y leal", conv: ["Compatible con niños", "Se lleva bien con otras mascotas", "Ideal para casa con patio"], historia: "Max llegó a la fundación hace 4 meses. Es un perro rescatado muy agradecido.", fundacion: "Fundación Huellitas Talca" },
+    { nombre: "Luna", edad: "2 años", sexo: "Hembra", tamano: "Pequeña", tipo: "gato", compat: 91, img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop", desc: "Juguetona y curiosa. Perfecta para departamentos.", temp: "Juguetona e independiente", conv: ["Ideal para departamento", "Se lleva bien con niños mayores", "Prefiere ser única mascota"], historia: "Luna fue rescatada de la calle. Es muy cariñosa una vez que confía.", fundacion: "Protectora Animal Maule" },
+    { nombre: "Toby", edad: "4 años", sexo: "Macho", tamano: "Grande", tipo: "perro", compat: 87, img: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=400&fit=crop", desc: "Energético y leal. Ideal para personas activas.", temp: "Energético y protector", conv: ["Necesita espacio", "Bueno con niños", "Requiere paseos diarios largos"], historia: "Toby es un perro activo que disfruta de la compañía y el ejercicio.", fundacion: "Amigos de los Animales" },
+    { nombre: "Mía", edad: "1 año", sexo: "Hembra", tamano: "Pequeña", tipo: "perro", compat: 89, img: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop", desc: "Cachorra alegre y muy sociable.", temp: "Alegre y juguetona", conv: ["Perfecta para familias", "Se lleva bien con otros perros", "Ideal para casa"], historia: "Mía es una cachorra llena de energía y cariño.", fundacion: "Fundación Huellitas Talca" },
+    { nombre: "Simba", edad: "5 años", sexo: "Macho", tamano: "Mediano", tipo: "gato", compat: 85, img: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=400&fit=crop", desc: "Gato tranquilo y elegante. Ideal para personas adultas.", temp: "Tranquilo y observador", conv: ["Ideal para departamento", "Prefiere ambientes calmados", "Se adapta bien a personas solas"], historia: "Simba busca un hogar tranquilo donde pueda observar el mundo.", fundacion: "Protectora Animal Maule" },
+    { nombre: "Rocky", edad: "6 años", sexo: "Macho", tamano: "Grande", tipo: "perro", compat: 82, img: "https://images.unsplash.com/photo-1561037404-61cd46aa613b?w=600&h=400&fit=crop", desc: "Perro maduro, calmado y muy obediente.", temp: "Calmado y leal", conv: ["Excelente con niños", "Ideal para dueños con experiencia", "Necesita patio"], historia: "Rocky es un perro senior muy bien educado y agradecido.", fundacion: "Amigos de los Animales" },
+    { nombre: "Nala", edad: "3 años", sexo: "Hembra", tamano: "Mediana", tipo: "perro", compat: 90, img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=400&fit=crop", desc: "Cariñosa y equilibrada. Se adapta a casi cualquier hogar.", temp: "Equilibrada y afectuosa", conv: ["Compatible con niños y otras mascotas", "Ideal para casa o depto grande"], historia: "Nala es una perrita muy equilibrada que se adapta fácilmente.", fundacion: "Fundación Huellitas Talca" },
+    { nombre: "Cleo", edad: "2 años", sexo: "Hembra", tamano: "Pequeña", tipo: "gato", compat: 88, img: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&h=400&fit=crop", desc: "Gata curiosa y muy limpia. Perfecta para departamentos.", temp: "Curiosa y cariñosa", conv: ["Ideal para departamento", "Se lleva bien con otros gatos", "Le gusta jugar"], historia: "Cleo es una gata joven llena de personalidad.", fundacion: "Protectora Animal Maule" },
+    { nombre: "Bruno", edad: "4 años", sexo: "Macho", tamano: "Mediano", tipo: "perro", compat: 86, img: "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&h=400&fit=crop", desc: "Perro leal y protector. Ideal para familias.", temp: "Protector y cariñoso", conv: ["Bueno con niños", "Ideal para casa", "Necesita paseos moderados"], historia: "Bruno busca una familia a la que cuidar y querer.", fundacion: "Amigos de los Animales" },
+    { nombre: "Lola", edad: "1 año", sexo: "Hembra", tamano: "Pequeña", tipo: "perro", compat: 93, img: "https://images.unsplash.com/photo-1591160690555-5debfba289f0?w=600&h=400&fit=crop", desc: "Cachorra dulce y juguetona. Perfecta para primerizos.", temp: "Dulce y juguetona", conv: ["Ideal para cualquier hogar", "Se lleva bien con niños", "Fácil de educar"], historia: "Lola es una cachorra muy inteligente y afectuosa.", fundacion: "Fundación Huellitas Talca" },
+    { nombre: "Thor", edad: "3 años", sexo: "Macho", tamano: "Grande", tipo: "perro", compat:
