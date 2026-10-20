@@ -8,48 +8,44 @@
   <style>
     :root {
       --rojo: #C41E3A;
-      --rojo-oscuro: #9B1830;
       --verde: #2E7D32;
       --gris-suave: #F5F5F7;
       --gris-texto: #6B7280;
       --texto: #1F2937;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f8f8f8;
+      background: #f0f0f0;
       color: var(--texto);
-      min-height: 100vh;
     }
 
-    /* Contenedor principal responsive */
     .app {
       max-width: 480px;
       margin: 0 auto;
-      min-height: 100vh;
       background: white;
+      min-height: 100vh;
       position: relative;
-      box-shadow: 0 0 40px rgba(0,0,0,0.06);
-    }
-
-    @media (min-width: 768px) {
-      body { background: #eee; padding: 40px 20px; }
-      .app {
-        border-radius: 24px;
-        overflow: hidden;
-        min-height: 90vh;
-        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
-      }
+      box-shadow: 0 0 30px rgba(0,0,0,0.08);
     }
 
     .screen {
       display: none;
       flex-direction: column;
       min-height: 100vh;
+      padding-bottom: 70px; /* espacio para la barra de navegación */
     }
-    .screen.active { display: flex; }
+
+    .screen.active {
+      display: flex;
+    }
 
     /* ===== SPLASH ===== */
     .splash {
@@ -58,26 +54,32 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 28px;
-      background: linear-gradient(180deg, #FFF5F5 0%, #FFFFFF 60%);
+      padding: 40px 24px;
+      background: linear-gradient(180deg, #FFF5F5 0%, #FFFFFF 65%);
       text-align: center;
     }
-    .logo-area { margin-bottom: 16px; }
-    .logo-area svg { width: 140px; height: 140px; }
+
+    .logo-area svg {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 12px;
+    }
+
     .splash h1 {
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 700;
       color: var(--rojo);
-      margin-bottom: 14px;
-      letter-spacing: -0.8px;
+      margin-bottom: 12px;
     }
+
     .value-prop {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--gris-texto);
-      line-height: 1.55;
-      max-width: 320px;
-      margin-bottom: 50px;
+      line-height: 1.5;
+      max-width: 300px;
+      margin-bottom: 40px;
     }
+
     .btn-paw {
       background: none;
       border: none;
@@ -85,438 +87,495 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
+
     .paw-circle {
-      width: 96px;
-      height: 96px;
+      width: 90px;
+      height: 90px;
       background: var(--rojo);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 12px 30px rgba(196, 30, 58, 0.35);
-      transition: transform 0.15s;
+      box-shadow: 0 10px 25px rgba(196, 30, 58, 0.35);
     }
-    .btn-paw:active .paw-circle { transform: scale(0.93); }
-    .paw-circle svg { width: 40px; height: 40px; fill: white; }
+
+    .paw-circle svg {
+      width: 36px;
+      height: 36px;
+      fill: white;
+    }
+
     .btn-paw span {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--rojo);
     }
 
     /* ===== HEADER ===== */
     .header {
-      padding: 16px 20px;
+      padding: 14px 18px;
       background: white;
-      border-bottom: 1px solid #F3F4F6;
+      border-bottom: 1px solid #eee;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 20;
     }
+
     .header .back {
-      width: 40px; height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--gris-suave);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
     }
-    .header h2 { font-size: 18px; font-weight: 600; flex: 1; }
+
+    .header h2 {
+      font-size: 17px;
+      font-weight: 600;
+    }
 
     /* ===== FORMULARIO ===== */
-    .form-content { padding: 24px 20px; display: flex; flex-direction: column; gap: 18px; flex: 1; }
-    .photo-upload { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .form-content {
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .photo-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
     .photo-circle {
-      width: 110px; height: 110px; border-radius: 50%;
-      background: var(--gris-suave); border: 3px dashed #D1D5DB;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: var(--gris-texto); font-size: 13px; cursor: pointer;
-    }
-    .photo-circle span { font-size: 28px; }
-    .form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 7px; }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 14px 16px; border: 1.5px solid #E5E7EB;
-      border-radius: 12px; font-size: 15px; font-family: inherit; outline: none;
-      background: white;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--rojo); }
-    .form-group textarea { min-height: 80px; resize: none; }
-    .radio-group { display: flex; gap: 12px; }
-    .radio-option {
-      flex: 1; padding: 13px; border: 1.5px solid #E5E7EB; border-radius: 12px;
-      text-align: center; font-size: 14px; font-weight: 500; cursor: pointer;
-    }
-    .radio-option.active { border-color: var(--rojo); background: #FEF2F2; color: var(--rojo); }
-    .btn-fixed { padding: 16px 20px 32px; background: white; border-top: 1px solid #F3F4F6; }
-    .btn-primary {
-      background: var(--rojo); color: white; border: none; padding: 16px;
-      border-radius: 14px; font-size: 16px; font-weight: 600; width: 100%;
-      box-shadow: 0 4px 14px rgba(196,30,58,0.3);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--gris-suave);
+      border: 3px dashed #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gris-texto);
+      font-size: 13px;
       cursor: pointer;
+    }
+
+    .photo-circle span {
+      font-size: 26px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--rojo);
+    }
+
+    .form-group textarea {
+      min-height: 75px;
+      resize: none;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .radio-option {
+      flex: 1;
+      padding: 12px;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .radio-option.active {
+      border-color: var(--rojo);
+      background: #FEF2F2;
+      color: var(--rojo);
+    }
+
+    .btn-fixed {
+      padding: 14px 18px 24px;
+      background: white;
+      border-top: 1px solid #eee;
+    }
+
+    .btn-primary {
+      background: var(--rojo);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
     }
 
     /* ===== MATCHES ===== */
-    .matches-list { padding: 12px 20px 30px; display: flex; flex-direction: column; gap: 16px; }
-    .matches-header { padding: 8px 20px 4px; font-size: 14px; color: var(--gris-texto); }
-    .pet-card {
-      background: white; border-radius: 18px; overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07); border: 1px solid #F3F4F6;
-      cursor: pointer;
-      transition: transform 0.15s;
+    .matches-header {
+      padding: 10px 18px 6px;
+      font-size: 13px;
+      color: var(--gris-texto);
     }
-    .pet-card:active { transform: scale(0.98); }
-    .pet-card img { width: 100%; height: 200px; object-fit: cover; }
-    .pet-card-body { padding: 16px; }
-    .pet-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
-    .pet-card h3 { font-size: 18px; font-weight: 600; }
-    .compat { background: #E8F5E9; color: var(--verde); font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
-    .pet-meta { font-size: 13px; color: var(--gris-texto); margin-bottom: 8px; }
-    .pet-desc { font-size: 14px; color: var(--texto); line-height: 1.45; margin-bottom: 10px; }
-    .fundacion { font-size: 12px; color: var(--gris-texto); }
-    .fundacion::before { content: "✓ "; color: var(--verde); font-weight: 700; }
+
+    .matches-list {
+      padding: 8px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pet-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+      border: 1px solid #f0f0f0;
+      cursor: pointer;
+    }
+
+    .pet-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .pet-card-body {
+      padding: 14px;
+    }
+
+    .pet-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 5px;
+    }
+
+    .pet-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .compat {
+      background: #E8F5E9;
+      color: var(--verde);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .pet-meta {
+      font-size: 12px;
+      color: var(--gris-texto);
+      margin-bottom: 6px;
+    }
+
+    .pet-desc {
+      font-size: 13px;
+      color: var(--texto);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .fundacion {
+      font-size: 12px;
+      color: var(--gris-texto);
+    }
+
+    .fundacion::before {
+      content: "✓ ";
+      color: var(--verde);
+      font-weight: 700;
+    }
 
     /* ===== DETALLE ===== */
-    .detail-hero { width: 100%; height: 300px; object-fit: cover; }
-    .detail-content { padding: 24px 20px; }
-    .detail-title { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
-    .detail-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
-    .tag { background: var(--gris-suave); font-size: 13px; padding: 6px 12px; border-radius: 20px; font-weight: 500; }
-    .section { margin-bottom: 20px; }
-    .section h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-    .section p, .section ul { font-size: 14px; color: var(--gris-texto); line-height: 1.55; }
-    .section ul { list-style: none; }
-    .section li { margin-bottom: 5px; }
-    .section li::before { content: "✓ "; color: var(--verde); font-weight: 700; }
+    .detail-hero {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .detail-content {
+      padding: 20px 18px;
+    }
+
+    .detail-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .detail-tags {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      background: var(--gris-suave);
+      font-size: 12px;
+      padding: 5px 11px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .section {
+      margin-bottom: 16px;
+    }
+
+    .section h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .section p, .section ul {
+      font-size: 13px;
+      color: var(--gris-texto);
+      line-height: 1.5;
+    }
+
+    .section ul {
+      list-style: none;
+    }
+
+    .section li {
+      margin-bottom: 4px;
+    }
+
+    .section li::before {
+      content: "✓ ";
+      color: var(--verde);
+      font-weight: 700;
+    }
 
     /* ===== PROCESO ===== */
-    .process-content { padding: 40px 24px; text-align: center; flex: 1; }
-    .success-icon { width: 84px; height: 84px; background: #E8F5E9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 38px; }
-    .steps { display: flex; justify-content: space-between; position: relative; margin: 36px 0 40px; }
-    .steps::before { content: ""; position: absolute; top: 18px; left: 30px; right: 30px; height: 3px; background: #E5E7EB; }
-    .step { display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 1; width: 70px; }
-    .step-circle { width: 38px; height: 38px; border-radius: 50%; background: #E5E7EB; color: var(--gris-texto); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
-    .step.active .step-circle, .step.completed .step-circle { background: var(--verde); color: white; }
-    .step span { font-size: 12px; color: var(--gris-texto); }
-    .step.active span { color: var(--verde); font-weight: 600; }
-    .info-box { background: #F0FDF4; border-radius: 16px; padding: 18px; text-align: left; font-size: 14px; line-height: 1.5; }
+    .process-content {
+      padding: 30px 20px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .success-icon {
+      width: 76px;
+      height: 76px;
+      background: #E8F5E9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 34px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 28px 0 32px;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 28px;
+      right: 28px;
+      height: 3px;
+      background: #e5e5e5;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      z-index: 1;
+      width: 68px;
+    }
+
+    .step-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #e5e5e5;
+      color: var(--gris-texto);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .step.active .step-circle,
+    .step.completed .step-circle {
+      background: var(--verde);
+      color: white;
+    }
+
+    .step span {
+      font-size: 11px;
+      color: var(--gris-texto);
+    }
+
+    .step.active span {
+      color: var(--verde);
+      font-weight: 600;
+    }
+
+    .info-box {
+      background: #F0FDF4;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.5;
+    }
 
     /* ===== SEGUIMIENTO ===== */
-    .follow-content { padding: 24px 20px; flex: 1; }
-    .timeline-item { display: flex; gap: 16px; margin-bottom: 24px; position: relative; }
-    .timeline-item:not(:last-child)::after { content: ""; position: absolute; left: 15px; top: 36px; bottom: -24px; width: 2px; background: #E5E7EB; }
-    .timeline-dot { width: 32px; height: 32px; border-radius: 50%; background: #E5E7EB; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-    .timeline-item.completed .timeline-dot { background: var(--verde); color: white; }
-    .timeline-item.current .timeline-dot { background: var(--rojo); color: white; }
-    .timeline-body h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-    .timeline-body p { font-size: 13px; color: var(--gris-texto); }
-    .contact-section { background: #FFF5F5; border-radius: 16px; padding: 20px; margin-top: 10px; }
-    .contact-section h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-    .contact-section > p { font-size: 13px; color: var(--gris-texto); margin-bottom: 14px; line-height: 1.45; }
-    .contact-section input { width: 100%; padding: 13px 14px; border: 1.5px solid #E5E7EB; border-radius: 12px; font-size: 15px; margin-bottom: 12px; font-family: inherit; }
-    .btn-contact { background: var(--rojo); color: white; border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 600; width: 100%; cursor: pointer; }
+    .follow-content {
+      padding: 20px 18px;
+      flex: 1;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 32px;
+      bottom: -20px;
+      width: 2px;
+      background: #e5e5e5;
+    }
+
+    .timeline-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .timeline-item.completed .timeline-dot {
+      background: var(--verde);
+      color: white;
+    }
+
+    .timeline-item.current .timeline-dot {
+      background: var(--rojo);
+      color: white;
+    }
+
+    .timeline-body h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .timeline-body p {
+      font-size: 12px;
+      color: var(--gris-texto);
+    }
+
+    .contact-section {
+      background: #FFF5F5;
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 8px;
+    }
+
+    .contact-section h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .contact-section > p {
+      font-size: 12px;
+      color: var(--gris-texto);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .contact-section input {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 11px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      font-family: inherit;
+    }
+
+    .btn-contact {
+      background: var(--rojo);
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+    }
 
     /* ===== HOME ===== */
-    .profile-header { padding: 32px 20px; text-align: center; background: linear-gradient(180deg, #FFF5F5 0%, #fff 100%); }
-    .avatar { width: 88px; height: 88px; border-radius: 50%; background: var(--rojo); color: white; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; margin: 0 auto 14px; }
-    .home-cards { padding: 0 20px 40px; display: flex; flex-direction: column; gap: 16px; }
-    .home-card { background: white; border-radius: 16px; padding: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #F3F4F6; }
-    .home-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 14px; display: flex; justify-content: space-between; }
-    .count { background: var(--gris-suave); font-size: 12px; padding: 3px 9px; border-radius: 10px; }
-    .mini-pets { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; }
-    .mini-pet { width: 64px; text-align: center; flex-shrink: 0; }
-    .mini-pet img { width: 60px; height: 60px; border-radius: 14px; object-fit: cover; margin-bottom: 5px; }
-    .mini-pet span { font-size: 11px; color: var(--gris-texto); }
-
-    /* Navegación inferior del prototipo */
-    .proto-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #111;
-      display: flex;
-      overflow-x: auto;
-      padding: 8px 6px;
-      gap: 4px;
-      z-index: 100;
-      max-width: 480px;
-      margin: 0 auto;
+    .profile-header {
+      padding: 28px 18px;
+      text-align: center;
+      background: linear-gradient(180deg, #FFF5F5 0%, #fff 100%);
     }
-    @media (min-width: 768px) {
-      .proto-nav {
-        border-radius: 0 0 24px 24px;
-      }
-    }
-    .proto-nav button {
-      flex: 1;
-      min-width: 70px;
-      background: #222;
-      color: #aaa;
-      border: none;
-      padding: 8px 4px;
-      font-size: 11px;
-      border-radius: 8px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .proto-nav button.active { background: var(--rojo); color: white; }
 
-    /* Espacio para que el contenido no quede bajo la barra */
-    .screen { padding-bottom: 70px; }
-  </style>
-</head>
-<body>
-  <div class="app">
-
-    <!-- 1. SPLASH -->
-    <div class="screen active" id="screen-1">
-      <div class="splash">
-        <div class="logo-area">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 175 C35 125 5 80 40 48 C62 28 88 40 100 62 C112 40 138 28 160 48 C195 80 165 125 100 175 Z" fill="#E5394D"/>
-            <ellipse cx="72" cy="98" rx="30" ry="34" fill="#C41E3A"/>
-            <circle cx="58" cy="86" r="9" fill="#C41E3A"/>
-            <ellipse cx="50" cy="90" rx="7" ry="5" fill="#C41E3A"/>
-            <ellipse cx="128" cy="102" rx="24" ry="30" fill="#B71C1C"/>
-            <polygon points="113,74 120,92 106,92" fill="#B71C1C"/>
-            <polygon points="143,74 136,92 150,92" fill="#B71C1C"/>
-            <ellipse cx="100" cy="148" rx="15" ry="12" fill="white"/>
-            <circle cx="88" cy="137" r="5.5" fill="white"/>
-            <circle cx="100" cy="132" r="5.5" fill="white"/>
-            <circle cx="112" cy="137" r="5.5" fill="white"/>
-            <circle cx="94" cy="129" r="4.5" fill="white"/>
-            <path d="M132 158 Q155 148 168 130" stroke="#C41E3A" stroke-width="7" fill="none" stroke-linecap="round"/>
-            <polygon points="168 124 178 140 160 136" fill="#C41E3A"/>
-          </svg>
-        </div>
-        <h1>PetSwipe</h1>
-        <p class="value-prop">
-          Matching responsable de perros y gatos.<br>
-          Compatibilidad real de estilo de vida<br>
-          + acompañamiento post-adopción.
-        </p>
-        <button class="btn-paw" onclick="goTo(2)">
-          <div class="paw-circle">
-            <svg viewBox="0 0 24 24"><path d="M12 2C10.9 2 10 2.9 10 4s.9 2 2 2 2-.9 2-2-.9-2-2-2zM8.5 6C7.12 6 6 7.12 6 8.5S7.12 11 8.5 11 11 9.88 11 8.5 9.88 6 8.5 6zm7 0c-1.38 0-2.5 1.12-2.5 2.5S14.12 11 15.5 11 18 9.88 18 8.5 16.88 6 15.5 6zM4.5 11C3.12 11 2 12.12 2 13.5S3.12 16 4.5 16 7 14.88 7 13.5 5.88 11 4.5 11zm15 0c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5zM12 13c-2.76 0-5 2.24-5 5v2h10v-2c0-2.76-2.24-5-5-5z"/></svg>
-          </div>
-          <span>Comenzar</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 2. PERFIL -->
-    <div class="screen" id="screen-2">
-      <div class="header">
-        <div class="back" onclick="goTo(1)">←</div>
-        <h2>Tu estilo de vida</h2>
-      </div>
-      <div class="form-content">
-        <div class="photo-upload">
-          <div class="photo-circle" onclick="alert('Aquí se abriría la cámara o galería')">
-            <span>📷</span>Subir foto
-          </div>
-          <small style="color:var(--gris-texto);font-size:12px;">Foto de tu cara (obligatoria)</small>
-        </div>
-        <div class="form-group">
-          <label>Edad</label>
-          <input type="number" value="28">
-        </div>
-        <div class="form-group">
-          <label>Ciudad / Comuna</label>
-          <input type="text" value="Talca, Maule">
-        </div>
-        <div class="form-group">
-          <label>Tipo de vivienda</label>
-          <div class="radio-group">
-            <div class="radio-option active" onclick="selectRadio(this)">Casa</div>
-            <div class="radio-option" onclick="selectRadio(this)">Departamento</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Ingreso líquido aproximado</label>
-          <select>
-            <option>$400.000 - $600.000</option>
-            <option selected>$600.000 - $900.000</option>
-            <option>$900.000 - $1.200.000</option>
-            <option>Más de $1.200.000</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Horas semanales disponibles</label>
-          <input type="number" value="15">
-        </div>
-        <div class="form-group">
-          <label>¿Qué buscas en una mascota?</label>
-          <textarea>Compañía, alguien tranquilo que se adapte a mi rutina</textarea>
-        </div>
-        <div class="form-group">
-          <label>¿Qué puedes ofrecerle?</label>
-          <textarea>Tiempo de calidad, paseos diarios y mucho cariño</textarea>
-        </div>
-      </div>
-      <div class="btn-fixed">
-        <button class="btn-primary" onclick="generarMatches()">Ver mis matches</button>
-      </div>
-    </div>
-
-    <!-- 3. MATCHES -->
-    <div class="screen" id="screen-3">
-      <div class="header">
-        <div class="back" onclick="goTo(2)">←</div>
-        <h2>Tus matches compatibles</h2>
-      </div>
-      <div class="matches-header" id="matches-count">Cargando matches...</div>
-      <div class="matches-list" id="matches-container"></div>
-    </div>
-
-    <!-- 4. DETALLE -->
-    <div class="screen" id="screen-4">
-      <img class="detail-hero" id="detail-img" src="" alt="Mascota">
-      <div class="detail-content">
-        <div class="detail-title" id="detail-name"></div>
-        <div class="detail-tags" id="detail-tags"></div>
-        <div class="section"><h4>Temperamento</h4><p id="detail-temp"></p></div>
-        <div class="section"><h4>Convivencia</h4><ul id="detail-convivencia"></ul></div>
-        <div class="section"><h4>Estado de salud</h4>
-          <ul>
-            <li>Esterilizado / Castrado</li>
-            <li>Vacunas al día</li>
-            <li>Microchip instalado</li>
-            <li>Desparasitado</li>
-          </ul>
-        </div>
-        <div class="section"><h4>Su historia</h4><p id="detail-historia"></p></div>
-        <div class="section"><h4>Publicado por</h4><p style="color:var(--verde);font-weight:500" id="detail-fundacion"></p></div>
-      </div>
-      <div class="btn-fixed">
-        <button class="btn-primary" onclick="goTo(5)">Quiero conocerlo</button>
-      </div>
-    </div>
-
-    <!-- 5. PROCESO -->
-    <div class="screen" id="screen-5">
-      <div class="header">
-        <div class="back" onclick="goTo(4)">←</div>
-        <h2>Proceso de adopción</h2>
-      </div>
-      <div class="process-content">
-        <div class="success-icon">🎉</div>
-        <h2>¡Match exitoso!</h2>
-        <p>Has iniciado el proceso con <strong id="proceso-nombre">Max</strong></p>
-        <div class="steps">
-          <div class="step completed"><div class="step-circle">1</div><span>Match</span></div>
-          <div class="step active"><div class="step-circle">2</div><span>Contacto</span></div>
-          <div class="step"><div class="step-circle">3</div><span>Visita</span></div>
-          <div class="step"><div class="step-circle">4</div><span>Adopción</span></div>
-        </div>
-        <div class="info-box">
-          <strong>PetSwipe + la fundación</strong><br>
-          Te acompañamos en todo el proceso. En las próximas 24 horas la fundación se contactará contigo.
-        </div>
-      </div>
-      <div class="btn-fixed">
-        <button class="btn-primary" onclick="goTo(6)">Ver seguimiento</button>
-      </div>
-    </div>
-
-    <!-- 6. SEGUIMIENTO -->
-    <div class="screen" id="screen-6">
-      <div class="header">
-        <div class="back" onclick="goTo(5)">←</div>
-        <h2>Seguimiento post-adopción</h2>
-      </div>
-      <div class="follow-content">
-        <p style="font-size:15px;color:var(--gris-texto);margin-bottom:24px;">
-          Acompañamos a las familias durante los primeros meses para asegurar una buena adaptación.
-        </p>
-        <div class="timeline-item completed">
-          <div class="timeline-dot">✓</div>
-          <div class="timeline-body">
-            <h4>Mes 1 – Completado</h4>
-            <p>Primera visita de seguimiento realizada.</p>
-          </div>
-        </div>
-        <div class="timeline-item current">
-          <div class="timeline-dot">3</div>
-          <div class="timeline-body">
-            <h4>Mes 3 – Próximo</h4>
-            <p>Te contactaremos para coordinar la visita.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">6</div>
-          <div class="timeline-body">
-            <h4>Mes 6 – Pendiente</h4>
-            <p>Evaluación final de adaptación.</p>
-          </div>
-        </div>
-
-        <div class="contact-section">
-          <h4>¿Necesitas apoyo?</h4>
-          <p>Déjanos tu teléfono y correo. Nos contactaremos contigo o con la fundación entre <strong>24 a 48 horas</strong>.</p>
-          <input type="tel" id="telefono" placeholder="Teléfono (ej: +56 9 1234 5678)">
-          <input type="email" id="correo" placeholder="Correo electrónico">
-          <button class="btn-contact" onclick="enviarContacto()">Solicitar contacto</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7. HOME -->
-    <div class="screen" id="screen-7">
-      <div class="profile-header">
-        <div class="avatar">MP</div>
-        <h2>Matías P.</h2>
-        <p style="font-size:14px;color:var(--gris-texto);margin-top:4px;">Talca, Maule · Casa · 15 hrs/semana</p>
-      </div>
-      <div class="home-cards">
-        <div class="home-card">
-          <h3>Matches guardados <span class="count" id="home-count">0</span></h3>
-          <div class="mini-pets" id="home-minis"></div>
-        </div>
-        <div class="home-card">
-          <h3>Adopciones en proceso <span class="count">1</span></h3>
-          <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:52px;height:52px;border-radius:14px;background:#eee;"></div>
-            <div>
-              <div style="font-weight:600;font-size:15px;" id="home-proceso-nombre">—</div>
-              <div style="font-size:13px;color:var(--gris-texto);">Etapa: Contacto</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Navegación del prototipo -->
-    <div class="proto-nav">
-      <button class="active" onclick="goTo(1)">1. Splash</button>
-      <button onclick="goTo(2)">2. Perfil</button>
-      <button onclick="goTo(3)">3. Matches</button>
-      <button onclick="goTo(4)">4. Detalle</button>
-      <button onclick="goTo(5)">5. Proceso</button>
-      <button onclick="goTo(6)">6. Seguim.</button>
-      <button onclick="goTo(7)">7. Home</button>
-    </div>
-  </div>
-
-<script>
-  const mascotas = [
-    { nombre:"Max", edad:"3 años", sexo:"Macho", tamano:"Mediano", compat:94, img:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop", desc:"Tranquilo, sociable y muy cariñoso.", temp:"Tranquilo y leal", conv:["Compatible con niños","Se lleva bien con otras mascotas","Ideal para casa"], historia:"Max llegó hace 4 meses. Es muy agradecido.", fundacion:"Fundación Huellitas Talca" },
-    { nombre:"Luna", edad:"2 años", sexo:"Hembra", tamano:"Pequeña", compat:91, img:"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop", desc:"Juguetona y curiosa. Ideal para departamentos.", temp:"Juguetona e independiente", conv:["Ideal para departamento","Se lleva bien con niños mayores"], historia:"Luna fue rescatada de la calle.", fundacion:"Protectora Animal Maule" },
-    { nombre:"Toby", edad:"4 años", sexo:"Macho", tamano:"Grande", compat:87, img:"https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=400&fit=crop", desc:"Energético y leal. Ideal para personas activas.", temp:"Energético y protector", conv:["Necesita espacio","Bueno con niños"], historia:"Toby disfruta del ejercicio y la compañía.", fundacion:"Amigos de los Animales" },
-    { nombre:"Mía", edad:"1 año", sexo:"Hembra", tamano:"Pequeña", compat:89, img:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop", desc:"Cachorra alegre y muy sociable.", temp:"Alegre y juguetona", conv:["Perfecta para familias","Se lleva bien con otros perros"], historia:"Mía es una cachorra llena de energía.", fundacion:"Fundación Huellitas Talca" },
-    { nombre:"Simba", edad:"5 años", sexo:"Macho", tamano:"Mediano", compat:85, img:"https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=400&fit=crop", desc:"Gato tranquilo y elegante.", temp:"Tranquilo y observador", conv:["Ideal para departamento","Prefiere ambientes calmados"], historia:"Simba busca un hogar tranquilo.", fundacion:"Protectora Animal Maule" },
-    { nombre:"Rocky", edad:"6 años", sexo:"Macho", tamano:"Grande", compat:82, img:"https://images.unsplash.com/photo-1561037404-61cd46aa613b?w=600&h=400&fit=crop", desc:"Perro maduro, calmado y obediente.", temp:"Calmado y leal", conv:["Excelente con niños","Ideal para dueños con experiencia"], historia:"Rocky es un perro senior muy educado.", fundacion:"Amigos de los Animales" },
-    { nombre:"Nala", edad:"3 años", sexo:"Hembra", tamano:"Mediana", compat:90, img:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=400&fit=crop", desc:"Cariñosa y equilibrada.", temp:"Equilibrada y afectuosa", conv:["Compatible con niños y otras mascotas"], historia:"Nala se adapta fácilmente.", fundacion:"Fundación Huellitas Talca" },
-    { nombre:"Cleo", edad:"2 años", sexo:"Hembra", tamano:"Pequeña", compat:88, img:"https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&h=400&fit=crop", desc:"Gata curiosa y muy limpia.", temp:"Curiosa y cariñosa", conv:["Ideal para departamento","Se lleva bien con otros gatos"], historia:"Cleo tiene mucha personalidad.", fundacion:"Protectora Animal Maule" },
-    { nombre:"Bruno", edad:"4 años", sexo:"Macho", tamano:"Mediano", compat:86, img:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&h=400&fit=crop", desc:"Perro leal y protector.", temp:"Protector y cariñoso", conv:["Bueno con niños","Ideal para casa"], historia:"Bruno busca una familia a la que cuidar.", fundacion:"Amigos de los Animales" },
-    { nombre:"Lola", edad:"1 año", sexo:"Hembra", tamano:"Pequeña", compat:93, img:"https://images.unsplash.com/photo-1591160690555-5debfba289f0?w=600&h=400&fit=crop", desc:"Cachorra dulce y juguetona.", temp:"Dulce y juguetona", conv:["Ideal para cualquier hogar","Fácil de educar"], historia:"Lola es muy inteligente y afectuosa.", fundacion:"Fundación Huellitas Talca" },
-    { nombre:"Thor", edad:"3 años", sexo:"Macho", tamano:"Grande", compat:84, img:"https://images.unsplash.com/photo-1477884213360-7e9d7dcc04e7?w=600&h=400&fit=crop", desc:"Perro fuerte y noble.", temp:"Noble y activo", conv:["Necesita espacio y ejercicio"], historia:"Thor es imponente pero de gran corazón.", fundacion:"Amigos de los Animales" },
-    { nombre:"Misha", edad:"4 años", sexo:"Hembra", tamano:"Mediana", compat:87, img:"https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=600&h=400&fit=crop", desc:"Gata independiente pero cariñosa.", temp:"Independiente y afectuosa", conv:["Ideal para departamento","Prefiere ser única mascota"], historia:"Misha busca ser la reina de la casa.", fundacion:"Protectora Animal Maule" },
-    { nombre:"Kira", edad:"2 años", sexo:"Hembra", tamano:"Mediana", compat:91, img:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop&q=80", desc:"Perrita inteligente y obediente.", temp:"Inteligente y leal", conv:["Excelente con niños","Fácil de entrenar"], historia:"Kira aprende muy rápido.", fundacion:"Fundación Huellitas Talca" },
-    { nombre:"Felix", edad:"3 años", sexo:"Macho", tamano:"Mediano", compat:89, img:"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=600&h=400&fit=crop", desc:"Gato sociable y juguetón.", temp:"Sociable y juguetón", conv:["Ideal para familias","Se lleva bien con otros animales"], historia:"Felix disfruta de la compañía.", fundacion:"Protectora Animal Maule" },
-    { nombre:"Canela", edad:"5 años", sexo:"Hembra", tamano:"Pequeña", compat:88, img:"https://images.unsplash.com/photo-1601758228041-3caa14147900?w=600&h=400&fit=crop", desc:"Perrita calmada y dulce.", temp:"Calmada y dulce", conv:["Perfecta para departamentos","Ideal para personas mayores"], historia:"Canela es muy tranquila y agradecida.", fundacion:"Amigos de los Animales" },
-    { nombre:"Zeus", edad:"2 años", sexo:"Macho", tamano:"Grande", compat:83, img:"https://images.unsplash.com/photo-1568572933382-74d440642117?w=600&h=400&fit=crop", desc:"Joven y enérgico.", temp:"Enérgico y juguetón", conv:["Necesita mucho ejercicio","Ideal para casa con patio"], historia:"Zeus busca un compañero de aventuras.", fundacion:"Fundación Huellitas
+    .avatar {
