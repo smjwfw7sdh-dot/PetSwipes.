@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetSwipe – Matching responsable de mascotas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rojo: #C41E3A;
+      --verde: #2E7D32;
+      --gris-suave: #F5F5F7;
+      --gris-texto: #6B7280;
+      --texto: #1F2937;
+      --blanco: #FFFFFF;
+      --sombra: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #E5E7EB;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Marco del iPhone */
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: #000;
+      border-radius: 48px;
+      padding: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--blanco);
+      border-radius: 38px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Notch */
+    .notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 34px;
+      background: #000;
+      border-radius: 0 0 20px 20px;
+      z-index: 100;
+    }
+
+    /* Status bar */
+    .status-bar {
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--texto);
+      background: var(--blanco);
+      z-index: 50;
+    }
+
+    /* Pantallas */
+    .screen {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      overflow-y: auto;
+      background: var(--blanco);
+      position: relative;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    /* ===== SPLASH ===== */
+    .splash {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 30px;
+      background: linear-gradient(180deg, #FFF5F5 0%, #FFFFFF 100%);
+    }
+
+    .splash .logo {
+      width: 90px;
+      height: 90px;
+      background: var(--rojo);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(196, 30, 58, 0.25);
+    }
+
+    .splash .logo svg {
+      width: 50px;
+      height: 50px;
+      fill: white;
+    }
+
+    .splash h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--rojo);
+      margin-bottom: 8px;
+    }
+
+    .splash p {
+      font-size: 16px;
+      color: var(--gris-texto);
+      margin-bottom: 48px;
+    }
+
+    .btn-primary {
+      background: var(--rojo);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 16px;
+      font-size: 17px;
+      font-weight: 600;
+      width: 100%;
+      max-width: 280px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 14px rgba(196, 30, 58, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    /* ===== HEADER COMÚN ===== */
+    .header {
+      padding: 12px 20px 16px;
+      background: var(--blanco);
+      border-bottom: 1px solid #F3F4F6;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header .back {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gris-suave);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .header h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--texto);
+      flex: 1;
+    }
+
+    /* ===== FORMULARIO ESTILO DE VIDA ===== */
+    .form-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--texto);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      background: var(--blanco);
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--rojo);
+    }
+
+    .form-group textarea {
+      min-height: 80px;
+      resize: none;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .radio-option {
+      flex: 1;
+      padding: 12px;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .radio-option.active {
+      border-color: var(--rojo);
+      background: #FEF2F2;
+      color: var(--rojo);
+    }
+
+    .btn-fixed {
+      padding: 16px 20px 28px;
+      background: var(--blanco);
+      border-top: 1px solid #F3F4F6;
+    }
+
+    /* ===== MATCHES ===== */
+    .matches-list {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pet-card {
+      background: var(--blanco);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      border: 1px solid #F3F4F6;
+    }
+
+    .pet-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .pet-card-body {
+      padding: 16px;
+    }
+
+    .pet-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .pet-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--texto);
+    }
+
+    .compat {
+      background: #E8F5E9;
+      color: var(--verde);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .pet-meta {
+      font-size: 13px;
+      color: var(--gris-texto);
+      margin-bottom: 8px;
+    }
+
+    .pet-desc {
+      font-size: 14px;
+      color: var(--texto);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .fundacion {
+      font-size: 12px;
+      color: var(--gris-texto);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .fundacion::before {
+      content: "✓";
+      color: var(--verde);
+      font-weight: 700;
+    }
+
+    /* ===== DETALLE MASCOTA ===== */
+    .detail-hero {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .detail-content {
+      padding: 20px;
+    }
+
+    .detail-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--texto);
+      margin-bottom: 6px;
+    }
+
+    .detail-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: var(--gris-suave);
+      color: var(--texto);
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--texto);
+      margin-bottom: 8px;
+    }
+
+    .section p, .section ul {
+      font-size: 14px;
+      color: var(--gris-texto);
+      line-height: 1.5;
+    }
+
+    .section ul {
+      list-style: none;
+    }
+
+    .section li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .section li::before {
+      content: "✓";
+      color: var(--verde);
+      font-weight: 700;
+    }
+
+    /* ===== PROCESO ADOPCIÓN ===== */
+    .process-content {
+      padding: 30px 24px;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: #E8F5E9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+    }
+
+    .process-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--texto);
+      margin-bottom: 8px;
+    }
+
+    .process-content > p {
+      font-size: 15px;
+      color: var(--gris-texto);
+      margin-bottom: 32px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 30px;
+      right: 30px;
+      height: 3px;
+      background: #E5E7EB;
+      z-index: 0;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 1;
+      width: 70px;
+    }
+
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #E5E7EB;
+      color: var(--gris-texto);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .step.active .step-circle {
+      background: var(--verde);
+      color: white;
+    }
+
+    .step.completed .step-circle {
+      background: var(--verde);
+      color: white;
+    }
+
+    .step span {
+      font-size: 12px;
+      color: var(--gris-texto);
+      font-weight: 500;
+    }
+
+    .step.active span {
+      color: var(--verde);
+      font-weight: 600;
+    }
+
+    .info-box {
+      background: #F0FDF4;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: left;
+      font-size: 14px;
+      color: var(--texto);
+      line-height: 1.5;
+    }
+
+    /* ===== SEGUIMIENTO ===== */
+    .follow-content {
+      padding: 24px 20px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .timeline-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 36px;
+      bottom: -24px;
+      width: 2px;
+      background: #E5E7EB;
+    }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #E5E7EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .timeline-item.completed .timeline-dot {
+      background: var(--verde);
+      color: white;
+    }
+
+    .timeline-item.current .timeline-dot {
+      background: var(--rojo);
+      color: white;
+    }
+
+    .timeline-body h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .timeline-body p {
+      font-size: 13px;
+      color: var(--gris-texto);
+    }
+
+    /* ===== HOME / PERFIL ===== */
+    .profile-header {
+      padding: 24px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #FFF5F5 0%, #FFFFFF 100%);
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--rojo);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 auto 12px;
+    }
+
+    .profile-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .profile-header p {
+      font-size: 14px;
+      color: var(--gris-texto);
+    }
+
+    .home-cards {
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .home-card {
+      background: var(--blanco);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--sombra);
+      border: 1px solid #F3F4F6;
+    }
+
+    .home-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .home-card .count {
+      background: var(--gris-suave);
+      color: var(--texto);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .mini-pets {
+      display: flex;
+      gap: 10px;
+    }
+
+    .mini-pet {
+      width: 60px;
+      text-align: center;
+    }
+
+    .mini-pet img {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      object-fit: cover;
+      margin-bottom: 4px;
+    }
+
+    .mini-pet span {
+      font-size: 11px;
+      color: var(--gris-texto);
+    }
+
+    /* Navegación inferior del prototipo */
+    .proto-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #111;
+      display: flex;
+      overflow-x: auto;
+      padding: 8px 4px;
+      gap: 4px;
+      z-index: 200;
+    }
+
+    .proto-nav button {
+      flex: 1;
+      min-width: 70px;
+      background: #222;
+      color: #aaa;
+      border: none;
+      padding: 8px 4px;
+      font-size: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .proto-nav button.active {
+      background: var(--rojo);
+      color: white;
+    }
+
+    /* Ajuste para que el contenido no quede detrás del nav */
+    .screen {
+      padding-bottom: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="phone-inner">
+    <div class="notch"></div>
+
+    <!-- ==================== 1. SPLASH ==================== -->
+    <div class="screen active" id="screen-1">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●● WiFi</span>
+      </div>
+      <div class="splash">
+        <div class="logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2C10.9 2 10 2.9 10 4C10 5.1 10.9 6 12 6C13.1 6 14 5.1 14 4C14 2.9 13.1 2 12 2ZM8.5 6C7.12 6 6 7.12 6 8.5C6 9.88 7.12 11 8.5 11C9.88 11 11 9.88 11 8.5C11 7.12 9.88 6 8.5 6ZM15.5 6C14.12 6 13 7.12 13 8.5C13 9.88 14.12 11 15.5 11C16.88 11 18 9.88 18 8.5C18 7.12 16.88 6 15.5 6ZM4.5 11C3.12 11 2 12.12 2 13.5C2 14.88 3.12 16 4.5 16C5.88 16 7 14.88 7 13.5C7 12.12 5.88 11 4.5 11ZM19.5 11C18.12 11 17 12.12 17 13.5C17 14.88 18.12 16 19.5 16C20.88 16 22 14.88 22 13.5C22 12.12 20.88 11 19.5 11ZM12 13C9.24 13 7 15.24 7 18V20H17V18C17 15.24 14.76 13 12 13Z"/></svg>
+        </div>
+        <h1>PetSwipe</h1>
+        <p>Matching responsable de mascotas</p>
+        <button class="btn-primary" onclick="goTo(2)">Comenzar</button>
+      </div>
+    </div>
+
+    <!-- ==================== 2. FORMULARIO ESTILO DE VIDA ==================== -->
+    <div class="screen" id="screen-2">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●● WiFi</span>
+      </div>
+      <div class="header">
+        <div class="back" onclick="goTo(1)">←</div>
+        <h2>Tu estilo de vida</h2>
+      </div>
+      <div class="form-content">
+        <div class="form-group">
+          <label>Edad</label>
+          <input type="number" placeholder="Ej: 28" value="28">
+        </div>
+        <div class="form-group">
+          <label>Ciudad / Comuna</label>
+          <input type="text" value="Talca, Maule">
+        </div>
+        <div class="form-group">
+          <label>Tipo de vivienda</label>
+          <div class="radio-group">
+            <div class="radio-option active" onclick="selectRadio(this)">Casa</div>
+            <div class="radio-option" onclick="selectRadio(this)">Departamento</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ingreso líquido aproximado</label>
+          <select>
+            <option>$400.000 - $600.000</option>
+            <option selected>$600.000 - $900.000</option>
+            <option>$900.000 - $1.200.000</option>
+            <option>Más de $1.200.000</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Horas semanales disponibles para la mascota</label>
+          <input type="number" value="15" placeholder="Ej: 12">
+        </div>
+        <div class="form-group">
+          <label>¿Qué buscas en una mascota?</label>
+          <textarea>Compañía, alguien tranquilo que se adapte a mi rutina de trabajo</textarea>
+        </div>
+        <div class="form-group">
+          <label>¿Qué puedes ofrecerle a la mascota?</label>
+          <textarea>Tiempo de calidad, paseos diarios, alimentación balanceada y mucho cariño</textarea>
+        </div>
+      </div>
+      <div class="btn-fixed">
+        <button class="btn-primary" onclick="goTo(3)">Ver mis matches</button>
+      </div>
+    </div>
+
+    <!-- ==================== 3. RESULTADOS MATCHING ==================== -->
+    <div class="screen" id="screen-3">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●● WiFi</span>
+      </div>
+      <div class="header">
+        <div class="back" onclick="goTo(2)">←</div>
+        <h2>Tus matches compatibles</h2>
+      </div>
+      <div class="matches-list">
+        <!-- Card 1 -->
+        <div class="pet-card" onclick="goTo(4)">
+          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop" alt="Max">
+          <div class="pet-card-body">
+            <div class="pet-card-header">
+              <h3>Max</h3>
+              <span class="compat">94% compatible</span>
+            </div>
+            <div class="pet-meta">3 años · Macho · Mediano</div>
+            <div class="pet-desc">Tranquilo, sociable y muy cariñoso. Ideal para familias o personas que buscan compañía leal.</div>
+            <div class="fundacion">Fundación Huellitas Talca</div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="pet-card">
+          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop" alt="Luna">
+          <div class="pet-card-body">
+            <div class="pet-card-header">
+              <h3>Luna</h3>
+              <span class="compat">89% compatible</span>
+            </div>
+            <div class="pet-meta">2 años · Hembra · Pequeña</div>
+            <div class="pet-desc">Juguetona y curiosa. Se adapta muy bien a departamentos y es ideal para dueños primerizos.</div>
+            <div class="fundacion">Protectora Animal Maule</div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="pet-card">
+          <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=400&fit=crop" alt="Toby">
+          <div class="pet-card-body">
+            <div class="pet-card-header">
+              <h3>Toby</h3>
+              <span class="compat">87% compatible</span>
+            </div>
+            <div class="pet-meta">4 años · Macho · Grande</div>
+            <div class="pet-desc">Energético y leal. Perfecto para personas activas que disfrutan de paseos largos.</div>
+            <div class="fundacion">Fundación Amigos de los Animales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 4. DETALLE MASCOTA ==================== -->
+    <div class="screen" id="screen-4">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●● WiFi</span>
+      </div>
+      <img class="detail-hero" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=600&fit=crop" alt="Max">
+      <div class="detail-content">
+        <div class="detail-title">Max</div>
+        <div class="detail-tags">
+          <span class="tag">3 años</span>
+          <span class="tag">Macho</span>
+          <span class="tag">Mediano</span>
+          <span class="tag" style="background:#E8F5E9;color:var(--verde)">94% match</span>
+        </div>
+
+        <div class="section">
+          <h4>Temperamento</h4>
+          <p>Tranquilo, sociable y muy cariñoso. Se lleva bien con personas y otros perros. Ideal para dueños que buscan compañía leal sin excesiva energía.</p>
+        </div>
+
+        <div class="section">
+          <h4>Convivencia</h4>
+          <ul>
+            <li>Compatible con niños</li>
+            <li>Se lleva bien con otras mascotas</li>
+            <li>Adaptado a casa con patio</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h4>Estado de salud</h4>
+          <ul>
+            <li>Esterilizado</li>
+            <li>Vacunas al día</li>
+            <li>Microchip instalado</li>
+            <li>Desparasitado</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h4>Su historia</h4>
+          <p>Max llegó a la fundación hace 4 meses. Es un perro rescatado de la calle que ha demostrado ser extremadamente agradecido y leal. Está listo para encontrar su hogar definitivo.</p>
+        </div>
+
+        <div class="section">
+          <h4>Publicado por</h4>
+          <p style="color:var(--verde);font-weight:500">✓ Fundación Huellitas Talca</p>
+        </div>
+      </div>
+      <div class="btn-fixed">
+        <button class="btn-primary" onclick="goTo(5)">Quiero conocerlo</button>
+      </div>
+    </div>
+
+    <!-- ==================== 5. PROCESO DE ADOPCIÓN ==================== -->
+    <div class="screen" id="screen-5">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●● WiFi</span>
+      </div>
+      <div class="header">
+        <div class="back" onclick="goTo(4)">←</div>
+        <h2>Proceso de adopción</h2>
+      </div>
+      <div class="process-content">
+        <div class="success-icon">🎉</div>
+        <h2>¡Match exitoso!</h2>
+        <p>Has iniciado el proceso con Max</p>
+
+        <div class="steps">
+          <div class="step completed">
+            <div class="step-circle">1</div>
+            <span>Match</span>
+          </div>
+          <div class="step active">
+            <div class="step-circle">2</div>
+            <span>Contacto</span>
+          </div>
+          <div class="step">
+            <div class="step-circle">3</div>
+            <span>Visita</span>
+          </div>
+          <div class="step">
+            <div class="step-circle">4</div>
+            <span>Adopción</span>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>PetSwipe + Fundación Huellitas</strong><br>
+          Te acompañamos en todo el proceso. En las próximas 24 horas la fundación se contactará contigo para coordinar una visita. Recuerda que el objetivo es asegurar el mejor hogar posible para Max.
+        </div>
+      </div>
+      <div class="btn-fixed">
+        <button class="btn-primary" onclick="goTo(6)">Ver seguimiento</button>
+      </div>
+    </div>
+
+    <!-- ==================== 6. SEGUIMIENTO POST-ADOPCIÓN ==================== -->
+    <div class="screen" id="screen-6">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●● WiFi</span>
+      </div>
+      <div class="header">
+        <div class="back" onclick="goTo(5)">←</div>
+        <h2>Seguimiento post-adopción</h2>
+      </div>
+      <div class="follow-content">
+        <p style="font-size:15px;color:var(--gris-texto);margin-bottom:24px;">
+          En PetSwipe acompañamos a las familias durante los primeros meses para asegurar una adaptación exitosa.
+        </p>
+
+        <div class="timeline-item completed">
+          <div class="timeline-dot">✓</div>
+          <div class="timeline-body">
+            <h4>Mes 1 – Completado</h4>
+            <p>Primera visita de seguimiento realizada. Max se está adaptando muy bien a su nuevo hogar.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item current">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-body">
+            <h4>Mes 3 – Próximo</h4>
+            <p>Programado para el 15 de enero. Te contactaremos para coordinar la visita.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">6</div>
+          <div class="timeline-body">
+            <h4>Mes 6 – Pendiente</h4>
+            <p>Evaluación final de adaptación y cierre del proceso de acompañamiento.</p>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:10px;">
+          <strong>¿Necesitas apoyo?</strong><br>
+          Estamos disponibles para orientarte en cualquier momento. Escríbenos o agenda una llamada con el equipo de la fundación.
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 7. PERFIL / HOME ==================== -->
+    <div class="screen" id="screen-7">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●● WiFi</span>
+      </div>
+      <div class="profile-header">
+        <div class="avatar">MP</div>
+        <h2>Matías P.</h2>
+        <p>Talca, Maule · Casa · 15 hrs/semana</p>
+      </div>
+      <div class="home-cards">
+        <div class="home-card">
+          <h3>Matches guardados <span class="count">3</span></h3>
+          <div class="mini-pets">
+            <div class="mini-pet">
+              <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100&h=100&fit=crop" alt="Max">
+              <span>Max 94%</span>
+            </div>
+            <div class="mini-pet">
+              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=100&h=100&fit=crop" alt="Luna">
+              <span>Luna 89%</span>
+            </div>
+            <div class="mini-pet">
+              <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=100&h=100&fit=crop" alt="Toby">
+              <span>Toby 87%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-card">
+          <h3>Adopciones en proceso <span class="count">1</span></h3>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=60&h=60&fit=crop" style="width:50px;height:50px;border-radius:12px;object-fit:cover;" alt="Max">
+            <div>
+              <div style="font-weight:600;font-size:14px;">Max</div>
+              <div style="font-size:12px;color:var(--gris-texto);">Etapa: Contacto con fundación</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-card">
+          <h3>Seguimiento activo</h3>
+          <p style="font-size:13px;color:var(--gris-texto);">Próxima visita programada: 15 de enero</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegación del prototipo -->
+    <div class="proto-nav">
+      <button class="active" onclick="goTo(1)">1. Splash</button>
+      <button onclick="goTo(2)">2. Perfil</button>
+      <button onclick="goTo(3)">3. Matches</button>
+      <button onclick="goTo(4)">4. Detalle</button>
+      <button onclick="goTo(5)">5. Proceso</button>
+      <button onclick="goTo(6)">6. Seguim.</button>
+      <button onclick="goTo(7)">7. Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function goTo(num) {
+    // Ocultar todas las pantallas
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    // Mostrar la seleccionada
+    document.getElementById('screen-' + num).classList.add('active');
+    
+    // Actualizar botones de navegación
+    document.querySelectorAll('.proto-nav button').forEach((btn, i) => {
+      btn.classList.toggle('active', i + 1 === num);
+    });
+    
+    // Scroll al top
+    document.getElementById('screen-' + num).scrollTop = 0;
+  }
+
+  function selectRadio(el) {
+    el.parentElement.querySelectorAll('.radio-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
