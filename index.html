@@ -3,60 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PetSwipe – Matching responsable</title>
+  <title>PetSwipe</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #00ACC1;          /* Cyan principal */
-      --primary-dark: #00838F;
-      --verde: #43A047;            /* Verde vivo */
-      --rosa: #EC407A;             /* Rosa de la imagen */
+      --primary: #00ACC1;
+      --verde: #43A047;
+      --rosa: #EC407A;
       --gris: #F5F5F7;
       --texto: #1F2937;
       --gris-texto: #6B7280;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f0f0f0;
-      color: var(--texto);
-    }
-    .app {
-      max-width: 480px;
-      margin: 0 auto;
-      background: white;
-      min-height: 100vh;
-    }
+    body { font-family: 'Inter', sans-serif; background: #f0f0f0; color: var(--texto); }
+    .app { max-width: 480px; margin: 0 auto; background: white; min-height: 100vh; }
     .screen { display: none; min-height: 100vh; flex-direction: column; }
     .screen.active { display: flex; }
 
-    /* SPLASH */
+    /* ===== SPLASH / INICIO ===== */
     .splash {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 40px 24px;
-      background: linear-gradient(180deg, #E0F7FA 0%, #FFFFFF 60%);
+      padding: 36px 18px 30px;
+      background: linear-gradient(180deg, #E0F7FA 0%, #FFFFFF 42%);
       text-align: center;
     }
-    .logo svg { width: 130px; height: 130px; margin-bottom: 16px; }
-    .splash h1 { font-size: 34px; color: var(--primary); margin-bottom: 12px; }
-    .splash p { font-size: 15px; color: var(--gris-texto); line-height: 1.5; margin-bottom: 40px; max-width: 300px; }
+    .logo svg { width: 100px; height: 100px; margin-bottom: 10px; }
+    .splash h1 { font-size: 30px; color: var(--primary); margin-bottom: 8px; }
+    .splash .value { font-size: 14px; color: var(--gris-texto); line-height: 1.45; margin-bottom: 24px; max-width: 290px; }
+
     .btn-paw {
       background: none; border: none; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      margin-bottom: 28px;
     }
     .paw {
-      width: 90px; height: 90px; background: var(--primary); border-radius: 50%;
+      width: 80px; height: 80px; background: var(--primary); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 10px 25px rgba(0,172,193,0.35);
+      box-shadow: 0 8px 20px rgba(0,172,193,0.35);
     }
-    .paw svg { width: 36px; height: 36px; fill: white; }
-    .btn-paw span { font-size: 15px; font-weight: 600; color: var(--primary); }
+    .paw svg { width: 32px; height: 32px; fill: white; }
+    .btn-paw span { font-size: 14px; font-weight: 600; color: var(--primary); }
 
-    /* HEADER */
+    /* Tarjetas de inicio */
+    .home-cards { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+    .home-card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+      border: 1px solid #f0f0f0;
+      text-align: left;
+    }
+    .home-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .badge {
+      font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 600;
+    }
+    .badge.verde { background: #E8F5E9; color: var(--verde); }
+    .badge.amarillo { background: #FFF8E1; color: #F9A825; }
+    .badge.azul { background: #E0F7FA; color: var(--primary); }
+
+    .cupon {
+      background: #F8FAFC;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cupon:last-child { margin-bottom: 0; }
+    .cupon-info { font-size: 13px; }
+    .cupon-info strong { display: block; margin-bottom: 2px; font-size: 13px; }
+    .codigo {
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 5px 9px;
+      border-radius: 7px;
+      letter-spacing: 1px;
+    }
+
+    .match-mini {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .match-item {
+      flex-shrink: 0;
+      width: 64px;
+      text-align: center;
+    }
+    .match-item img {
+      width: 58px; height: 58px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 4px;
+    }
+    .match-item span { font-size: 11px; color: var(--gris-texto); }
+
+    /* ===== RESTO DE PANTALLAS ===== */
     .header {
       padding: 14px 18px;
       border-bottom: 1px solid #eee;
@@ -70,194 +128,165 @@
     }
     .header h2 { font-size: 17px; font-weight: 600; }
 
-    /* FORM */
-    .form { padding: 20px 18px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
-    .photo-box { text-align: center; margin-bottom: 6px; }
+    .form { padding: 20px 18px; flex: 1; display: flex; flex-direction: column; gap: 15px; }
+    .photo-box { text-align: center; }
     .photo {
-      width: 110px; height: 110px; border-radius: 50%; background: var(--gris);
+      width: 105px; height: 105px; border-radius: 50%; background: var(--gris);
       border: 3px dashed #ccc; margin: 0 auto 8px;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: var(--gris-texto); font-size: 13px; cursor: pointer;
-      overflow: hidden; position: relative;
+      color: var(--gris-texto); font-size: 13px; cursor: pointer; overflow: hidden;
     }
     .photo img { width: 100%; height: 100%; object-fit: cover; }
-    .photo span { font-size: 26px; }
+    .photo span { font-size: 24px; }
     .photo-warning {
-      font-size: 12px;
-      color: #c62828;
-      background: #fef2f2;
-      padding: 8px 12px;
-      border-radius: 8px;
-      margin-top: 6px;
-      display: none;
+      font-size: 12px; color: #c62828; background: #fef2f2;
+      padding: 8px 12px; border-radius: 8px; margin-top: 6px; display: none;
     }
-    label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 6px; }
+    label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 5px; }
     input, select, textarea {
-      width: 100%; padding: 13px 14px; border: 1.5px solid #e5e5e5;
-      border-radius: 12px; font-size: 15px; font-family: inherit;
+      width: 100%; padding: 12px 14px; border: 1.5px solid #e5e5e5;
+      border-radius: 11px; font-size: 15px; font-family: inherit;
     }
     input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
-    textarea { min-height: 70px; resize: none; }
+    textarea { min-height: 68px; resize: none; }
     .radios { display: flex; gap: 10px; }
     .radio {
-      flex: 1; padding: 12px; border: 1.5px solid #e5e5e5; border-radius: 12px;
+      flex: 1; padding: 11px; border: 1.5px solid #e5e5e5; border-radius: 11px;
       text-align: center; font-size: 14px; font-weight: 500; cursor: pointer;
     }
     .radio.active { border-color: var(--primary); background: #E0F7FA; color: var(--primary); }
-    .btn-bottom { padding: 16px 18px 28px; border-top: 1px solid #eee; }
+    .btn-bottom { padding: 14px 18px 26px; border-top: 1px solid #eee; }
     .btn {
-      background: var(--primary); color: white; border: none; padding: 15px;
-      border-radius: 14px; font-size: 16px; font-weight: 600; width: 100%;
+      background: var(--primary); color: white; border: none; padding: 14px;
+      border-radius: 13px; font-size: 15px; font-weight: 600; width: 100%;
       cursor: pointer; box-shadow: 0 4px 12px rgba(0,172,193,0.3);
     }
 
-    /* MATCHES */
     .matches-header { padding: 12px 18px 6px; font-size: 13px; color: var(--gris-texto); }
     .matches { padding: 8px 18px 30px; display: flex; flex-direction: column; gap: 14px; }
     .card {
-      background: white; border-radius: 16px; overflow: hidden;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.07); border: 1px solid #f0f0f0;
-      cursor: pointer;
+      background: white; border-radius: 15px; overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.07); border: 1px solid #f0f0f0; cursor: pointer;
     }
-    .card img { width: 100%; height: 180px; object-fit: cover; }
-    .card-body { padding: 14px; }
-    .card-top { display: flex; justify-content: space-between; margin-bottom: 5px; }
-    .card h3 { font-size: 17px; }
-    .compat { background: #E8F5E9; color: var(--verde); font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
-    .meta { font-size: 12px; color: var(--gris-texto); margin-bottom: 6px; }
-    .desc { font-size: 13px; margin-bottom: 8px; line-height: 1.4; }
+    .card img { width: 100%; height: 175px; object-fit: cover; }
+    .card-body { padding: 13px; }
+    .card-top { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    .card h3 { font-size: 16px; }
+    .compat { background: #E8F5E9; color: var(--verde); font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
+    .meta { font-size: 12px; color: var(--gris-texto); margin-bottom: 5px; }
+    .desc { font-size: 13px; margin-bottom: 7px; line-height: 1.4; }
     .fund { font-size: 12px; color: var(--gris-texto); }
     .fund::before { content: "✓ "; color: var(--verde); font-weight: 700; }
 
-    /* DETALLE */
-    .hero { width: 100%; height: 260px; object-fit: cover; }
-    .detail { padding: 20px 18px; }
-    .detail h2 { font-size: 24px; margin-bottom: 8px; }
-    .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 18px; }
-    .tag { background: var(--gris); font-size: 12px; padding: 5px 11px; border-radius: 20px; }
-    .section { margin-bottom: 16px; }
-    .section h4 { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+    .hero { width: 100%; height: 250px; object-fit: cover; }
+    .detail { padding: 18px; }
+    .detail h2 { font-size: 23px; margin-bottom: 8px; }
+    .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tag { background: var(--gris); font-size: 12px; padding: 5px 10px; border-radius: 20px; }
+    .section { margin-bottom: 15px; }
+    .section h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
     .section p, .section ul { font-size: 13px; color: var(--gris-texto); line-height: 1.5; }
     .section ul { list-style: none; }
-    .section li { margin-bottom: 4px; }
+    .section li { margin-bottom: 3px; }
     .section li::before { content: "✓ "; color: var(--verde); font-weight: 700; }
 
-    /* PROCESO */
-    .process { padding: 30px 20px; text-align: center; flex: 1; }
-    .icon { width: 76px; height: 76px; background: #E8F5E9; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 34px; }
-    .steps { display: flex; justify-content: space-between; position: relative; margin: 28px 0 32px; }
-    .steps::before { content: ""; position: absolute; top: 16px; left: 28px; right: 28px; height: 3px; background: #e5e5e5; }
-    .step { display: flex; flex-direction: column; align-items: center; gap: 7px; z-index: 1; width: 68px; }
-    .circle { width: 34px; height: 34px; border-radius: 50%; background: #e5e5e5; color: var(--gris-texto);
+    .process { padding: 28px 20px; text-align: center; flex: 1; }
+    .icon { width: 72px; height: 72px; background: #E8F5E9; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 32px; }
+    .steps { display: flex; justify-content: space-between; position: relative; margin: 26px 0 28px; }
+    .steps::before { content: ""; position: absolute; top: 15px; left: 26px; right: 26px; height: 3px; background: #e5e5e5; }
+    .step { display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1; width: 66px; }
+    .circle { width: 32px; height: 32px; border-radius: 50%; background: #e5e5e5; color: var(--gris-texto);
       display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; }
     .step.active .circle, .step.done .circle { background: var(--verde); color: white; }
     .step span { font-size: 11px; color: var(--gris-texto); }
     .step.active span { color: var(--verde); font-weight: 600; }
-    .info { background: #E8F5E9; border-radius: 14px; padding: 14px; text-align: left; font-size: 13px; line-height: 1.5; }
+    .info { background: #E8F5E9; border-radius: 13px; padding: 13px; text-align: left; font-size: 13px; line-height: 1.5; }
 
-    /* SEGUIMIENTO */
-    .follow { padding: 20px 18px; flex: 1; }
-    .timeline { display: flex; gap: 14px; margin-bottom: 20px; position: relative; }
-    .timeline:not(:last-child)::after { content: ""; position: absolute; left: 14px; top: 32px; bottom: -20px; width: 2px; background: #e5e5e5; }
-    .dot { width: 30px; height: 30px; border-radius: 50%; background: #e5e5e5;
-      display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+    .follow { padding: 18px; flex: 1; }
+    .timeline { display: flex; gap: 13px; margin-bottom: 18px; position: relative; }
+    .timeline:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 30px; bottom: -18px; width: 2px; background: #e5e5e5; }
+    .dot { width: 28px; height: 28px; border-radius: 50%; background: #e5e5e5;
+      display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
     .timeline.done .dot { background: var(--verde); color: white; }
     .timeline.current .dot { background: var(--primary); color: white; }
-    .timeline h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+    .timeline h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
     .timeline p { font-size: 12px; color: var(--gris-texto); }
-    .contact { background: #E0F7FA; border-radius: 14px; padding: 18px; margin-top: 10px; }
-    .contact h4 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
-    .contact p { font-size: 12px; color: var(--gris-texto); margin-bottom: 12px; line-height: 1.4; }
-    .contact input { margin-bottom: 10px; }
+    .contact { background: #E0F7FA; border-radius: 13px; padding: 16px; margin-top: 8px; }
+    .contact h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .contact p { font-size: 12px; color: var(--gris-texto); margin-bottom: 10px; line-height: 1.4; }
+    .contact input { margin-bottom: 9px; }
 
-    /* HOME + RULETA */
-    .profile { padding: 28px 18px; text-align: center; background: linear-gradient(180deg, #E0F7FA 0%, #fff 100%); }
-    .avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--primary); color: white;
-      display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; margin: 0 auto 12px; overflow: hidden; }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .cards { padding: 0 18px 40px; display: flex; flex-direction: column; gap: 14px; }
-    .card-home { background: white; border-radius: 14px; padding: 16px; box-shadow: 0 3px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; }
-    .card-home h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; justify-content: space-between; }
-    .count { background: var(--gris); font-size: 12px; padding: 2px 8px; border-radius: 10px; }
-    .minis { display: flex; gap: 10px; overflow-x: auto; }
-    .mini { width: 60px; text-align: center; flex-shrink: 0; }
-    .mini img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; margin-bottom: 4px; }
-    .mini span { font-size: 11px; color: var(--gris-texto); }
-
-    /* RULETA */
+    /* RULETA mejorada */
     .ruleta-box {
       background: linear-gradient(135deg, #E0F7FA, #E8F5E9);
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
       text-align: center;
       border: 2px solid #B2EBF2;
+      margin: 16px;
     }
-    .ruleta-box h3 { font-size: 16px; margin-bottom: 8px; color: var(--primary); }
-    .ruleta-box p { font-size: 13px; color: var(--gris-texto); margin-bottom: 16px; }
+    .ruleta-box h3 { font-size: 16px; margin-bottom: 6px; color: var(--primary); }
+    .ruleta-box p { font-size: 13px; color: var(--gris-texto); margin-bottom: 14px; }
     .ruleta-container {
-      width: 260px;
-      height: 260px;
-      margin: 0 auto 16px;
+      width: 250px; height: 250px;
+      margin: 0 auto 14px;
       position: relative;
     }
     .ruleta {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       border-radius: 50%;
-      border: 6px solid var(--primary);
+      border: 5px solid var(--primary);
       position: relative;
       overflow: hidden;
       transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
     }
     .segmento {
       position: absolute;
-      width: 50%;
-      height: 50%;
+      width: 50%; height: 50%;
       transform-origin: 100% 100%;
       clip-path: polygon(0 0, 100% 0, 100% 100%);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
+      padding-top: 18px;
       font-size: 11px;
       font-weight: 600;
       color: white;
       text-align: center;
-      padding: 8px;
+      line-height: 1.25;
     }
     .puntero {
       position: absolute;
-      top: -12px;
-      left: 50%;
+      top: -10px; left: 50%;
       transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-top: 20px solid var(--primary);
+      width: 0; height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-top: 18px solid var(--primary);
       z-index: 10;
     }
     .btn-ruleta {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px 24px;
+      background: var(--primary); color: white; border: none;
+      padding: 11px 22px; border-radius: 30px; font-weight: 600;
+      cursor: pointer; font-size: 14px;
+    }
+    .btn-ruleta:disabled { background: #ccc; cursor: not-allowed; }
+    .premio-ganado {
+      margin-top: 12px; padding: 11px;
+      background: #E8F5E9; border-radius: 11px;
+      color: var(--verde); font-weight: 600; display: none;
+    }
+    .btn-inicio {
+      margin-top: 12px;
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 10px 20px;
       border-radius: 30px;
       font-weight: 600;
       cursor: pointer;
-      font-size: 15px;
-    }
-    .btn-ruleta:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
-    .premio-ganado {
-      margin-top: 14px;
-      padding: 12px;
-      background: #E8F5E9;
-      border-radius: 12px;
-      color: var(--verde);
-      font-weight: 600;
+      font-size: 14px;
       display: none;
     }
   </style>
@@ -265,7 +294,7 @@
 <body>
   <div class="app">
 
-    <!-- 1. SPLASH -->
+    <!-- 1. PANTALLA PRINCIPAL -->
     <div class="screen active" id="s1">
       <div class="splash">
         <div class="logo">
@@ -287,13 +316,46 @@
           </svg>
         </div>
         <h1>PetSwipe</h1>
-        <p>Matching responsable de perros y gatos.<br>Compatibilidad real de estilo de vida<br>+ acompañamiento post-adopción.</p>
+        <p class="value">Matching responsable de perros y gatos.<br>Compatibilidad real + acompañamiento post-adopción.</p>
+
         <button class="btn-paw" onclick="go(2)">
           <div class="paw">
             <svg viewBox="0 0 24 24"><path d="M12 2C10.9 2 10 2.9 10 4s.9 2 2 2 2-.9 2-2-.9-2-2-2zM8.5 6C7.12 6 6 7.12 6 8.5S7.12 11 8.5 11 11 9.88 11 8.5 9.88 6 8.5 6zm7 0c-1.38 0-2.5 1.12-2.5 2.5S14.12 11 15.5 11 18 9.88 18 8.5 16.88 6 15.5 6zM4.5 11C3.12 11 2 12.12 2 13.5S3.12 16 4.5 16 7 14.88 7 13.5 5.88 11 4.5 11zm15 0c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5zM12 13c-2.76 0-5 2.24-5 5v2h10v-2c0-2.76-2.24-5-5-5z"/></svg>
           </div>
           <span>Comenzar</span>
         </button>
+
+        <!-- Tarjetas que aparecen después del proceso -->
+        <div class="home-cards" id="homeCards" style="display:none;">
+          
+          <!-- 1. Mis Cupones -->
+          <div class="home-card" id="cuponesCard">
+            <h3>Mis Cupones <span class="badge azul" id="cuponesBadge">0</span></h3>
+            <div id="listaCupones">
+              <p style="font-size:13px;color:var(--gris-texto);">Aún no tienes cupones</p>
+            </div>
+          </div>
+
+          <!-- 2. Estado de Solicitud -->
+          <div class="home-card">
+            <h3>Estado de mi Solicitud</h3>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="flex:1;">
+                <div style="font-weight:600;font-size:14px;" id="solicitudTitulo">Sin solicitud activa</div>
+                <div style="font-size:12px;color:var(--gris-texto);" id="solicitudDesc">Completa el proceso de adopción</div>
+              </div>
+              <span class="badge" id="solicitudBadge">—</span>
+            </div>
+          </div>
+
+          <!-- 3. Matches guardados -->
+          <div class="home-card">
+            <h3>Matches guardados <span class="badge azul" id="matchesBadge">0</span></h3>
+            <div class="match-mini" id="matchesMini">
+              <p style="font-size:13px;color:var(--gris-texto);">Aún no tienes matches</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -306,19 +368,16 @@
       <div class="form">
         <div class="photo-box">
           <div class="photo" id="photoPreview" onclick="document.getElementById('fotoInput').click()">
-            <span>📷</span>
-            Subir foto
+            <span>📷</span>Subir foto
           </div>
           <input type="file" id="fotoInput" accept="image/*" style="display:none" onchange="cargarFoto(event)">
           <div class="photo-warning" id="photoWarning">
-            ⚠️ La foto debe mostrar tu cara completamente visible. No se aceptan fotos con mascarilla, gafas de sol o cara tapada.
+            ⚠️ La foto debe mostrar tu cara completamente visible.
           </div>
-          <small style="color:var(--gris-texto);font-size:12px;">Foto de cara visible (obligatoria)</small>
         </div>
-
         <div>
           <label>Nombre completo</label>
-          <input type="text" id="nombreCompleto" placeholder="Ej: Matías Andrés Pizarro López">
+          <input type="text" id="nombreCompleto" placeholder="Ej: Matías Andrés Pizarro">
         </div>
         <div>
           <label>Teléfono</label>
@@ -355,7 +414,7 @@
         </div>
         <div>
           <label>Ingreso líquido aproximado</label>
-          <select id="ingreso">
+          <select>
             <option>$400.000 - $600.000</option>
             <option selected>$600.000 - $900.000</option>
             <option>$900.000 - $1.200.000</option>
@@ -364,15 +423,15 @@
         </div>
         <div>
           <label>Horas semanales disponibles</label>
-          <input type="number" id="horas" value="15">
+          <input type="number" value="15">
         </div>
         <div>
           <label>¿Qué buscas en una mascota?</label>
-          <textarea id="buscas">Compañía, alguien tranquilo que se adapte a mi rutina</textarea>
+          <textarea>Compañía, alguien tranquilo</textarea>
         </div>
         <div>
           <label>¿Qué puedes ofrecerle?</label>
-          <textarea id="ofreces">Tiempo de calidad, paseos diarios y mucho cariño</textarea>
+          <textarea>Tiempo de calidad y mucho cariño</textarea>
         </div>
       </div>
       <div class="btn-bottom">
@@ -403,7 +462,6 @@
             <li>Esterilizado / Castrado</li>
             <li>Vacunas al día</li>
             <li>Microchip instalado</li>
-            <li>Desparasitado</li>
           </ul>
         </div>
         <div class="section"><h4>Su historia</h4><p id="hist"></p></div>
@@ -432,22 +490,22 @@
         </div>
         <div class="info">
           <strong>PetSwipe + la fundación</strong><br>
-          Te acompañamos en todo el proceso. En las próximas 24 horas la fundación se contactará contigo.
+          Te acompañamos en todo el proceso.
         </div>
       </div>
       <div class="btn-bottom">
-        <button class="btn" onclick="finalizarAdopcion()">Finalizar adopción y ver seguimiento</button>
+        <button class="btn" onclick="finalizarAdopcion()">Finalizar adopción</button>
       </div>
     </div>
 
-    <!-- 6. SEGUIMIENTO -->
+    <!-- 6. SEGUIMIENTO + RULETA -->
     <div class="screen" id="s6">
       <div class="header">
         <div class="back" onclick="go(5)">←</div>
-        <h2>Seguimiento post-adopción</h2>
+        <h2>Seguimiento + Premios</h2>
       </div>
       <div class="follow">
-        <p style="font-size:14px;color:var(--gris-texto);margin-bottom:20px;">Acompañamos a las familias durante los primeros meses.</p>
+        <p style="font-size:14px;color:var(--gris-texto);margin-bottom:16px;">Acompañamos a las familias durante los primeros meses.</p>
         
         <div class="timeline done">
           <div class="dot">✓</div>
@@ -470,56 +528,21 @@
             <p>Evaluación final.</p>
           </div>
         </div>
-
-        <div class="contact">
-          <h4>¿Necesitas apoyo?</h4>
-          <p>Déjanos tu teléfono y correo. Nos contactaremos entre <strong>24 a 48 horas</strong>.</p>
-          <input type="tel" id="tel" placeholder="Teléfono">
-          <input type="email" id="email" placeholder="Correo electrónico">
-          <button class="btn" onclick="contacto()">Solicitar contacto</button>
-        </div>
       </div>
-      <div class="btn-bottom">
-        <button class="btn" onclick="go(7)">Ir a mi perfil</button>
-      </div>
-    </div>
 
-    <!-- 7. HOME + RULETA -->
-    <div class="screen" id="s7">
-      <div class="profile">
-        <div class="avatar" id="avatarHome">MP</div>
-        <h2 id="nombreHome">Matías P.</h2>
-        <p style="font-size:13px;color:var(--gris-texto);margin-top:4px;" id="infoHome">Talca, Maule · Casa · 15 hrs/semana</p>
-      </div>
-      <div class="cards">
-        <div class="card-home">
-          <h3>Matches guardados <span class="count" id="home-count">0</span></h3>
-          <div class="minis" id="minis"></div>
+      <!-- RULETA -->
+      <div class="ruleta-box" id="ruletaBox">
+        <h3>🎡 Ruleta de Premios</h3>
+        <p>¡Felicitaciones por tu adopción!<br>Gira y gana un premio (solo 1 uso)</p>
+        
+        <div class="ruleta-container">
+          <div class="puntero"></div>
+          <div class="ruleta" id="ruleta"></div>
         </div>
-        <div class="card-home">
-          <h3>Adopciones en proceso <span class="count">1</span></h3>
-          <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
-            <div style="width:48px;height:48px;border-radius:12px;background:#eee;"></div>
-            <div>
-              <div style="font-weight:600;font-size:14px;" id="home-nombre">—</div>
-              <div style="font-size:12px;color:var(--gris-texto);">Etapa: Contacto</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RULETA -->
-        <div class="ruleta-box" id="ruletaBox" style="display:none;">
-          <h3>🎡 Ruleta de Premios PetSwipe</h3>
-          <p>¡Felicitaciones por completar tu adopción!<br>Gira la ruleta y gana un premio (solo 1 uso).</p>
-          
-          <div class="ruleta-container">
-            <div class="puntero"></div>
-            <div class="ruleta" id="ruleta"></div>
-          </div>
-          
-          <button class="btn-ruleta" id="btnGirar" onclick="girarRuleta()">¡Girar ruleta!</button>
-          <div class="premio-ganado" id="premioGanado"></div>
-        </div>
+        
+        <button class="btn-ruleta" id="btnGirar" onclick="girarRuleta()">¡Girar ruleta!</button>
+        <div class="premio-ganado" id="premioGanado"></div>
+        <button class="btn-inicio" id="btnInicio" onclick="go(1)">Ir al Inicio</button>
       </div>
     </div>
 
@@ -527,42 +550,38 @@
 
 <script>
   const pets = [
-    {n:"Max",e:"3 años",s:"Macho",t:"Mediano",c:94,i:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop",d:"Tranquilo, sociable y muy cariñoso.",temp:"Tranquilo y leal",conv:["Compatible con niños","Se lleva bien con otras mascotas"],h:"Max llegó hace 4 meses. Es muy agradecido.",f:"Fundación Huellitas Talca"},
-    {n:"Luna",e:"2 años",s:"Hembra",t:"Pequeña",c:91,i:"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop",d:"Juguetona y curiosa. Ideal para departamentos.",temp:"Juguetona e independiente",conv:["Ideal para departamento"],h:"Luna fue rescatada de la calle.",f:"Protectora Animal Maule"},
-    {n:"Toby",e:"4 años",s:"Macho",t:"Grande",c:87,i:"https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=400&fit=crop",d:"Energético y leal.",temp:"Energético y protector",conv:["Necesita espacio","Bueno con niños"],h:"Toby disfruta del ejercicio.",f:"Amigos de los Animales"},
-    {n:"Mía",e:"1 año",s:"Hembra",t:"Pequeña",c:89,i:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop",d:"Cachorra alegre y sociable.",temp:"Alegre y juguetona",conv:["Perfecta para familias"],h:"Mía está llena de energía.",f:"Fundación Huellitas Talca"},
-    {n:"Simba",e:"5 años",s:"Macho",t:"Mediano",c:85,i:"https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=400&fit=crop",d:"Gato tranquilo y elegante.",temp:"Tranquilo y observador",conv:["Ideal para departamento"],h:"Simba busca un hogar tranquilo.",f:"Protectora Animal Maule"},
-    {n:"Rocky",e:"6 años",s:"Macho",t:"Grande",c:82,i:"https://images.unsplash.com/photo-1561037404-61cd46aa613b?w=600&h=400&fit=crop",d:"Perro maduro y obediente.",temp:"Calmado y leal",conv:["Excelente con niños"],h:"Rocky es un perro senior educado.",f:"Amigos de los Animales"},
-    {n:"Nala",e:"3 años",s:"Hembra",t:"Mediana",c:90,i:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=400&fit=crop",d:"Cariñosa y equilibrada.",temp:"Equilibrada y afectuosa",conv:["Compatible con niños"],h:"Nala se adapta fácilmente.",f:"Fundación Huellitas Talca"},
-    {n:"Cleo",e:"2 años",s:"Hembra",t:"Pequeña",c:88,i:"https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&h=400&fit=crop",d:"Gata curiosa y limpia.",temp:"Curiosa y cariñosa",conv:["Ideal para departamento"],h:"Cleo tiene mucha personalidad.",f:"Protectora Animal Maule"},
-    {n:"Bruno",e:"4 años",s:"Macho",t:"Mediano",c:86,i:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&h=400&fit=crop",d:"Perro leal y protector.",temp:"Protector y cariñoso",conv:["Bueno con niños"],h:"Bruno busca una familia.",f:"Amigos de los Animales"},
-    {n:"Lola",e:"1 año",s:"Hembra",t:"Pequeña",c:93,i:"https://images.unsplash.com/photo-1591160690555-5debfba289f0?w=600&h=400&fit=crop",d:"Cachorra dulce y juguetona.",temp:"Dulce y juguetona",conv:["Ideal para cualquier hogar"],h:"Lola es inteligente.",f:"Fundación Huellitas Talca"},
-    {n:"Thor",e:"3 años",s:"Macho",t:"Grande",c:84,i:"https://images.unsplash.com/photo-1477884213360-7e9d7dcc04e7?w=600&h=400&fit=crop",d:"Perro fuerte y noble.",temp:"Noble y activo",conv:["Necesita espacio"],h:"Thor es de gran corazón.",f:"Amigos de los Animales"},
-    {n:"Misha",e:"4 años",s:"Hembra",t:"Mediana",c:87,i:"https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=600&h=400&fit=crop",d:"Gata independiente.",temp:"Independiente y afectuosa",conv:["Ideal para departamento"],h:"Misha busca ser la reina.",f:"Protectora Animal Maule"},
-    {n:"Kira",e:"2 años",s:"Hembra",t:"Mediana",c:91,i:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop&q=80",d:"Perrita inteligente.",temp:"Inteligente y leal",conv:["Excelente con niños"],h:"Kira aprende rápido.",f:"Fundación Huellitas Talca"},
-    {n:"Felix",e:"3 años",s:"Macho",t:"Mediano",c:89,i:"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=600&h=400&fit=crop",d:"Gato sociable.",temp:"Sociable y juguetón",conv:["Ideal para familias"],h:"Felix disfruta la compañía.",f:"Protectora Animal Maule"},
-    {n:"Canela",e:"5 años",s:"Hembra",t:"Pequeña",c:88,i:"https://images.unsplash.com/photo-1601758228041-3caa14147900?w=600&h=400&fit=crop",d:"Perrita calmada.",temp:"Calmada y dulce",conv:["Perfecta para departamentos"],h:"Canela es muy agradecida.",f:"Amigos de los Animales"},
-    {n:"Zeus",e:"2 años",s:"Macho",t:"Grande",c:83,i:"https://images.unsplash.com/photo-1568572933382-74d440642117?w=600&h=400&fit=crop",d:"Joven y enérgico.",temp:"Enérgico y juguetón",conv:["Necesita ejercicio"],h:"Zeus busca aventuras.",f:"Fundación Huellitas Talca"},
-    {n:"Olivia",e:"1 año",s:"Hembra",t:"Pequeña",c:92,i:"https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&h=400&fit=crop",d:"Gatita cariñosa.",temp:"Curiosa y afectuosa",conv:["Ideal para cualquier hogar"],h:"Olivia está llena de curiosidad.",f:"Protectora Animal Maule"},
-    {n:"Duque",e:"7 años",s:"Macho",t:"Mediano",c:86,i:"https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&h=400&fit=crop",d:"Perro senior tranquilo.",temp:"Tranquilo y educado",conv:["Ideal para adultos"],h:"Duque solo busca cariño.",f:"Amigos de los Animales"}
+    {n:"Max",e:"3 años",s:"Macho",t:"Mediano",c:94,i:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop",d:"Tranquilo y cariñoso.",temp:"Tranquilo y leal",conv:["Compatible con niños"],h:"Max llegó hace 4 meses.",f:"Fundación Huellitas Talca"},
+    {n:"Luna",e:"2 años",s:"Hembra",t:"Pequeña",c:91,i:"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop",d:"Juguetona y curiosa.",temp:"Juguetona",conv:["Ideal para departamento"],h:"Luna fue rescatada.",f:"Protectora Animal Maule"},
+    {n:"Toby",e:"4 años",s:"Macho",t:"Grande",c:87,i:"https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=400&fit=crop",d:"Energético y leal.",temp:"Energético",conv:["Necesita espacio"],h:"Toby disfruta el ejercicio.",f:"Amigos de los Animales"},
+    {n:"Mía",e:"1 año",s:"Hembra",t:"Pequeña",c:89,i:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop",d:"Cachorra alegre.",temp:"Alegre",conv:["Perfecta para familias"],h:"Mía está llena de energía.",f:"Fundación Huellitas Talca"},
+    {n:"Simba",e:"5 años",s:"Macho",t:"Mediano",c:85,i:"https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=400&fit=crop",d:"Gato tranquilo.",temp:"Tranquilo",conv:["Ideal para departamento"],h:"Simba busca hogar calmado.",f:"Protectora Animal Maule"},
+    {n:"Rocky",e:"6 años",s:"Macho",t:"Grande",c:82,i:"https://images.unsplash.com/photo-1561037404-61cd46aa613b?w=600&h=400&fit=crop",d:"Perro maduro.",temp:"Calmado",conv:["Excelente con niños"],h:"Rocky es muy educado.",f:"Amigos de los Animales"},
+    {n:"Nala",e:"3 años",s:"Hembra",t:"Mediana",c:90,i:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=400&fit=crop",d:"Cariñosa y equilibrada.",temp:"Equilibrada",conv:["Compatible con niños"],h:"Nala se adapta fácil.",f:"Fundación Huellitas Talca"},
+    {n:"Cleo",e:"2 años",s:"Hembra",t:"Pequeña",c:88,i:"https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&h=400&fit=crop",d:"Gata curiosa.",temp:"Curiosa",conv:["Ideal para departamento"],h:"Cleo tiene personalidad.",f:"Protectora Animal Maule"},
+    {n:"Bruno",e:"4 años",s:"Macho",t:"Mediano",c:86,i:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&h=400&fit=crop",d:"Leal y protector.",temp:"Protector",conv:["Bueno con niños"],h:"Bruno busca familia.",f:"Amigos de los Animales"},
+    {n:"Lola",e:"1 año",s:"Hembra",t:"Pequeña",c:93,i:"https://images.unsplash.com/photo-1591160690555-5debfba289f0?w=600&h=400&fit=crop",d:"Dulce y juguetona.",temp:"Dulce",conv:["Ideal para cualquier hogar"],h:"Lola es inteligente.",f:"Fundación Huellitas Talca"},
+    {n:"Thor",e:"3 años",s:"Macho",t:"Grande",c:84,i:"https://images.unsplash.com/photo-1477884213360-7e9d7dcc04e7?w=600&h=400&fit=crop",d:"Fuerte y noble.",temp:"Noble",conv:["Necesita espacio"],h:"Thor es de gran corazón.",f:"Amigos de los Animales"},
+    {n:"Misha",e:"4 años",s:"Hembra",t:"Mediana",c:87,i:"https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=600&h=400&fit=crop",d:"Independiente.",temp:"Independiente",conv:["Ideal para departamento"],h:"Misha busca ser la reina.",f:"Protectora Animal Maule"}
   ];
 
+  // Premios más cortos y legibles
   const premios = [
-    { texto: "20% Dcto\nVeterinarias", color: "#00ACC1" },
-    { texto: "30% Dcto\nPedidosYa", color: "#43A047" },
-    { texto: "15% Dcto\nConsultas", color: "#EC407A" },
-    { texto: "Collar\nGratis", color: "#00838F" },
-    { texto: "25% Dcto\nAlimento", color: "#43A047" },
-    { texto: "Kit de\nBienvenida", color: "#00ACC1" },
-    { texto: "Sesión\nAdiestramiento", color: "#EC407A" },
-    { texto: "10% Dcto\nPet Shop", color: "#00838F" }
+    { texto: "20% Vet", color: "#00ACC1" },
+    { texto: "30% PedidosYa", color: "#43A047" },
+    { texto: "15% Clínica", color: "#EC407A" },
+    { texto: "Collar Gratis", color: "#00838F" },
+    { texto: "25% Alimento", color: "#43A047" },
+    { texto: "Kit Bienvenida", color: "#00ACC1" },
+    { texto: "Adiestramiento", color: "#EC407A" },
+    { texto: "10% Pet Shop", color: "#00838F" }
   ];
 
   let actual = [];
-  let perfilCompleto = false;
+  let cupones = [];
   let adopcionFinalizada = false;
   let ruletaUsada = false;
   let fotoCargada = false;
+  let mascotaAdoptada = null;
 
   function crearRuleta() {
     const ruleta = document.getElementById('ruleta');
@@ -574,9 +593,16 @@
       seg.className = 'segmento';
       seg.style.background = p.color;
       seg.style.transform = `rotate(${i * angulo}deg)`;
-      seg.innerHTML = `<span style="transform: rotate(${angulo/2}deg); display:block; width:80px;">${p.texto}</span>`;
+      seg.innerHTML = `<span style="transform: rotate(${angulo/2}deg);">${p.texto}</span>`;
       ruleta.appendChild(seg);
     });
+  }
+
+  function generarCodigo() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    return code;
   }
 
   function go(n) {
@@ -584,13 +610,8 @@
     document.getElementById('s' + n).classList.add('active');
     window.scrollTo(0,0);
     
-    if (n === 7) {
-      actualizarHome();
-      if (adopcionFinalizada && !ruletaUsada) {
-        document.getElementById('ruletaBox').style.display = 'block';
-        crearRuleta();
-      }
-    }
+    if (n === 1) actualizarInicio();
+    if (n === 6) crearRuleta();
   }
 
   function selectRadio(el) {
@@ -601,14 +622,11 @@
   function cargarFoto(e) {
     const file = e.target.files[0];
     if (!file) return;
-    
     const reader = new FileReader();
     reader.onload = function(ev) {
-      const preview = document.getElementById('photoPreview');
-      preview.innerHTML = `<img src="${ev.target.result}" alt="Foto">`;
+      document.getElementById('photoPreview').innerHTML = `<img src="${ev.target.result}">`;
       fotoCargada = true;
       document.getElementById('photoWarning').style.display = 'block';
-      document.getElementById('avatarHome').innerHTML = `<img src="${ev.target.result}">`;
     };
     reader.readAsDataURL(file);
   }
@@ -619,25 +637,20 @@
     const correo = document.getElementById('correo').value.trim();
     const genero = document.getElementById('genero').value;
     
-    if (!nombre) return alert('Por favor ingresa tu nombre completo');
-    if (!tel) return alert('Por favor ingresa tu teléfono');
-    if (!correo) return alert('Por favor ingresa tu correo');
-    if (!genero) return alert('Por favor selecciona tu género');
-    if (!fotoCargada) return alert('Por favor sube una foto de tu cara visible');
+    if (!nombre) return alert('Ingresa tu nombre completo');
+    if (!tel) return alert('Ingresa tu teléfono');
+    if (!correo) return alert('Ingresa tu correo');
+    if (!genero) return alert('Selecciona tu género');
+    if (!fotoCargada) return alert('Sube una foto de tu cara visible');
     
-    document.getElementById('nombreHome').textContent = nombre.split(' ')[0] + ' ' + (nombre.split(' ')[1] || '');
-    document.getElementById('infoHome').textContent = document.getElementById('ciudad').value + ' · ' + 
-      (document.querySelector('.radio.active').textContent) + ' · ' + document.getElementById('horas').value + ' hrs/semana';
-    
-    perfilCompleto = true;
     generar();
   }
 
   function generar() {
     const shuffled = [...pets].sort(() => Math.random() - 0.5);
-    actual = shuffled.slice(0, 12 + Math.floor(Math.random()*4)).sort((a,b) => b.c - a.c);
+    actual = shuffled.slice(0, 10 + Math.floor(Math.random()*3)).sort((a,b) => b.c - a.c);
     
-    document.getElementById('count').textContent = `Encontramos ${actual.length} matches según tu perfil`;
+    document.getElementById('count').textContent = `Encontramos ${actual.length} matches`;
     const lista = document.getElementById('lista');
     lista.innerHTML = '';
     
@@ -658,11 +671,11 @@
         </div>`;
       lista.appendChild(div);
     });
-    
     go(3);
   }
 
   function detalle(p) {
+    mascotaAdoptada = p;
     document.getElementById('img').src = p.i;
     document.getElementById('nombre').textContent = p.n;
     document.getElementById('tags').innerHTML = `
@@ -675,20 +688,12 @@
     document.getElementById('hist').textContent = p.h;
     document.getElementById('fund').textContent = '✓ ' + p.f;
     document.getElementById('proc-nombre').textContent = p.n;
-    document.getElementById('home-nombre').textContent = p.n;
     go(4);
   }
 
   function finalizarAdopcion() {
     adopcionFinalizada = true;
     go(6);
-  }
-
-  function actualizarHome() {
-    document.getElementById('home-count').textContent = actual.length;
-    document.getElementById('minis').innerHTML = actual.slice(0,6).map(p => 
-      `<div class="mini"><img src="${p.i}"><span>${p.n}</span></div>`
-    ).join('');
   }
 
   function girarRuleta() {
@@ -708,20 +713,76 @@
     
     setTimeout(() => {
       const premio = premios[premioIndex];
+      const codigo = generarCodigo();
+      
+      cupones.push({
+        nombre: premio.texto,
+        codigo: codigo
+      });
+      
       document.getElementById('premioGanado').style.display = 'block';
-      document.getElementById('premioGanado').innerHTML = `¡Ganaste!<br><strong>${premio.texto.replace('\n', ' ')}</strong><br><small>Premio no acumulable · Válido por 30 días</small>`;
-      btn.textContent = 'Premio canjeado';
+      document.getElementById('premioGanado').innerHTML = `¡Ganaste: <strong>${premio.texto}</strong>!<br><small>Código: ${codigo}</small>`;
+      
+      document.getElementById('btnInicio').style.display = 'inline-block';
+      btn.textContent = 'Premio obtenido';
       ruletaUsada = true;
     }, 4200);
   }
 
+  function actualizarInicio() {
+    const cards = document.getElementById('homeCards');
+    
+    if (adopcionFinalizada || actual.length > 0) {
+      cards.style.display = 'flex';
+      
+      // Cupones
+      document.getElementById('cuponesBadge').textContent = cupones.length;
+      const listaCupones = document.getElementById('listaCupones');
+      if (cupones.length === 0) {
+        listaCupones.innerHTML = '<p style="font-size:13px;color:var(--gris-texto);">Aún no tienes cupones</p>';
+      } else {
+        listaCupones.innerHTML = cupones.map(c => `
+          <div class="cupon">
+            <div class="cupon-info">
+              <strong>${c.nombre}</strong>
+              <span style="font-size:11px;color:var(--gris-texto);">Válido 30 días</span>
+            </div>
+            <div class="codigo">${c.codigo}</div>
+          </div>
+        `).join('');
+      }
+      
+      // Solicitud
+      if (adopcionFinalizada && mascotaAdoptada) {
+        document.getElementById('solicitudTitulo').textContent = `Adopción de ${mascotaAdoptada.n}`;
+        document.getElementById('solicitudDesc').textContent = 'Solicitud en revisión por la fundación';
+        document.getElementById('solicitudBadge').className = 'badge amarillo';
+        document.getElementById('solicitudBadge').textContent = 'En revisión';
+      } else {
+        document.getElementById('solicitudTitulo').textContent = 'Sin solicitud activa';
+        document.getElementById('solicitudDesc').textContent = 'Completa el proceso de adopción';
+        document.getElementById('solicitudBadge').className = 'badge';
+        document.getElementById('solicitudBadge').textContent = '—';
+      }
+      
+      // Matches guardados
+      document.getElementById('matchesBadge').textContent = actual.length;
+      const mini = document.getElementById('matchesMini');
+      if (actual.length === 0) {
+        mini.innerHTML = '<p style="font-size:13px;color:var(--gris-texto);">Aún no tienes matches</p>';
+      } else {
+        mini.innerHTML = actual.slice(0, 5).map(p => `
+          <div class="match-item">
+            <img src="${p.i}" alt="${p.n}">
+            <span>${p.n}</span>
+          </div>
+        `).join('');
+      }
+    }
+  }
+
   function contacto() {
-    const tel = document.getElementById('tel').value.trim();
-    const email = document.getElementById('email').value.trim();
-    if (!tel || !email) return alert('Completa teléfono y correo');
-    alert('¡Gracias! Nos contactaremos entre 24 a 48 horas.\n\nTel: ' + tel + '\nEmail: ' + email);
-    document.getElementById('tel').value = '';
-    document.getElementById('email').value = '';
+    alert('Nos contactaremos contigo pronto');
   }
 </script>
 </body>
