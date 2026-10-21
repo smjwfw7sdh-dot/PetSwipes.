@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PetSwipe</title>
+  <title>PetSwipe – Matching responsable</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rojo: #C41E3A;
-      --verde: #2E7D32;
+      --primary: #00ACC1;          /* Cyan principal */
+      --primary-dark: #00838F;
+      --verde: #43A047;            /* Verde vivo */
+      --rosa: #EC407A;             /* Rosa de la imagen */
       --gris: #F5F5F7;
       --texto: #1F2937;
       --gris-texto: #6B7280;
@@ -36,23 +38,23 @@
       align-items: center;
       justify-content: center;
       padding: 40px 24px;
-      background: linear-gradient(180deg, #FFF5F5 0%, #fff 60%);
+      background: linear-gradient(180deg, #E0F7FA 0%, #FFFFFF 60%);
       text-align: center;
     }
     .logo svg { width: 130px; height: 130px; margin-bottom: 16px; }
-    .splash h1 { font-size: 34px; color: var(--rojo); margin-bottom: 12px; }
+    .splash h1 { font-size: 34px; color: var(--primary); margin-bottom: 12px; }
     .splash p { font-size: 15px; color: var(--gris-texto); line-height: 1.5; margin-bottom: 40px; max-width: 300px; }
     .btn-paw {
       background: none; border: none; cursor: pointer;
       display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
     .paw {
-      width: 90px; height: 90px; background: var(--rojo); border-radius: 50%;
+      width: 90px; height: 90px; background: var(--primary); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 10px 25px rgba(196,30,58,0.35);
+      box-shadow: 0 10px 25px rgba(0,172,193,0.35);
     }
     .paw svg { width: 36px; height: 36px; fill: white; }
-    .btn-paw span { font-size: 15px; font-weight: 600; color: var(--rojo); }
+    .btn-paw span { font-size: 15px; font-weight: 600; color: var(--primary); }
 
     /* HEADER */
     .header {
@@ -70,31 +72,43 @@
 
     /* FORM */
     .form { padding: 20px 18px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+    .photo-box { text-align: center; margin-bottom: 6px; }
     .photo {
-      width: 100px; height: 100px; border-radius: 50%; background: var(--gris);
+      width: 110px; height: 110px; border-radius: 50%; background: var(--gris);
       border: 3px dashed #ccc; margin: 0 auto 8px;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       color: var(--gris-texto); font-size: 13px; cursor: pointer;
+      overflow: hidden; position: relative;
     }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
     .photo span { font-size: 26px; }
+    .photo-warning {
+      font-size: 12px;
+      color: #c62828;
+      background: #fef2f2;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-top: 6px;
+      display: none;
+    }
     label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 6px; }
     input, select, textarea {
       width: 100%; padding: 13px 14px; border: 1.5px solid #e5e5e5;
       border-radius: 12px; font-size: 15px; font-family: inherit;
     }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--rojo); }
-    textarea { min-height: 75px; resize: none; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
+    textarea { min-height: 70px; resize: none; }
     .radios { display: flex; gap: 10px; }
     .radio {
       flex: 1; padding: 12px; border: 1.5px solid #e5e5e5; border-radius: 12px;
       text-align: center; font-size: 14px; font-weight: 500; cursor: pointer;
     }
-    .radio.active { border-color: var(--rojo); background: #FEF2F2; color: var(--rojo); }
+    .radio.active { border-color: var(--primary); background: #E0F7FA; color: var(--primary); }
     .btn-bottom { padding: 16px 18px 28px; border-top: 1px solid #eee; }
     .btn {
-      background: var(--rojo); color: white; border: none; padding: 15px;
+      background: var(--primary); color: white; border: none; padding: 15px;
       border-radius: 14px; font-size: 16px; font-weight: 600; width: 100%;
-      cursor: pointer; box-shadow: 0 4px 12px rgba(196,30,58,0.3);
+      cursor: pointer; box-shadow: 0 4px 12px rgba(0,172,193,0.3);
     }
 
     /* MATCHES */
@@ -140,7 +154,7 @@
     .step.active .circle, .step.done .circle { background: var(--verde); color: white; }
     .step span { font-size: 11px; color: var(--gris-texto); }
     .step.active span { color: var(--verde); font-weight: 600; }
-    .info { background: #F0FDF4; border-radius: 14px; padding: 14px; text-align: left; font-size: 13px; line-height: 1.5; }
+    .info { background: #E8F5E9; border-radius: 14px; padding: 14px; text-align: left; font-size: 13px; line-height: 1.5; }
 
     /* SEGUIMIENTO */
     .follow { padding: 20px 18px; flex: 1; }
@@ -149,18 +163,19 @@
     .dot { width: 30px; height: 30px; border-radius: 50%; background: #e5e5e5;
       display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
     .timeline.done .dot { background: var(--verde); color: white; }
-    .timeline.current .dot { background: var(--rojo); color: white; }
+    .timeline.current .dot { background: var(--primary); color: white; }
     .timeline h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
     .timeline p { font-size: 12px; color: var(--gris-texto); }
-    .contact { background: #FFF5F5; border-radius: 14px; padding: 18px; margin-top: 10px; }
+    .contact { background: #E0F7FA; border-radius: 14px; padding: 18px; margin-top: 10px; }
     .contact h4 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
     .contact p { font-size: 12px; color: var(--gris-texto); margin-bottom: 12px; line-height: 1.4; }
     .contact input { margin-bottom: 10px; }
 
-    /* HOME */
-    .profile { padding: 28px 18px; text-align: center; background: linear-gradient(180deg, #FFF5F5 0%, #fff 100%); }
-    .avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--rojo); color: white;
-      display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; margin: 0 auto 12px; }
+    /* HOME + RULETA */
+    .profile { padding: 28px 18px; text-align: center; background: linear-gradient(180deg, #E0F7FA 0%, #fff 100%); }
+    .avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--primary); color: white;
+      display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; margin: 0 auto 12px; overflow: hidden; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
     .cards { padding: 0 18px 40px; display: flex; flex-direction: column; gap: 14px; }
     .card-home { background: white; border-radius: 14px; padding: 16px; box-shadow: 0 3px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; }
     .card-home h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; justify-content: space-between; }
@@ -169,6 +184,82 @@
     .mini { width: 60px; text-align: center; flex-shrink: 0; }
     .mini img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; margin-bottom: 4px; }
     .mini span { font-size: 11px; color: var(--gris-texto); }
+
+    /* RULETA */
+    .ruleta-box {
+      background: linear-gradient(135deg, #E0F7FA, #E8F5E9);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #B2EBF2;
+    }
+    .ruleta-box h3 { font-size: 16px; margin-bottom: 8px; color: var(--primary); }
+    .ruleta-box p { font-size: 13px; color: var(--gris-texto); margin-bottom: 16px; }
+    .ruleta-container {
+      width: 260px;
+      height: 260px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    .ruleta {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 6px solid var(--primary);
+      position: relative;
+      overflow: hidden;
+      transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    }
+    .segmento {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      padding: 8px;
+    }
+    .puntero {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 20px solid var(--primary);
+      z-index: 10;
+    }
+    .btn-ruleta {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .btn-ruleta:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .premio-ganado {
+      margin-top: 14px;
+      padding: 12px;
+      background: #E8F5E9;
+      border-radius: 12px;
+      color: var(--verde);
+      font-weight: 600;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -178,7 +269,22 @@
     <div class="screen active" id="s1">
       <div class="splash">
         <div class="logo">
-          <svg viewBox="0 0 200 200"><path d="M100 175 C35 125 5 80 40 48 C62 28 88 40 100 62 C112 40 138 28 160 48 C195 80 165 125 100 175 Z" fill="#E5394D"/><ellipse cx="72" cy="98" rx="30" ry="34" fill="#C41E3A"/><circle cx="58" cy="86" r="9" fill="#C41E3A"/><ellipse cx="50" cy="90" rx="7" ry="5" fill="#C41E3A"/><ellipse cx="128" cy="102" rx="24" ry="30" fill="#B71C1C"/><polygon points="113,74 120,92 106,92" fill="#B71C1C"/><polygon points="143,74 136,92 150,92" fill="#B71C1C"/><ellipse cx="100" cy="148" rx="15" ry="12" fill="white"/><circle cx="88" cy="137" r="5.5" fill="white"/><circle cx="100" cy="132" r="5.5" fill="white"/><circle cx="112" cy="137" r="5.5" fill="white"/><circle cx="94" cy="129" r="4.5" fill="white"/><path d="M132 158 Q155 148 168 130" stroke="#C41E3A" stroke-width="7" fill="none" stroke-linecap="round"/><polygon points="168 124 178 140 160 136" fill="#C41E3A"/></svg>
+          <svg viewBox="0 0 200 200">
+            <path d="M100 175 C35 125 5 80 40 48 C62 28 88 40 100 62 C112 40 138 28 160 48 C195 80 165 125 100 175 Z" fill="#00ACC1"/>
+            <ellipse cx="72" cy="98" rx="30" ry="34" fill="#00838F"/>
+            <circle cx="58" cy="86" r="9" fill="#00838F"/>
+            <ellipse cx="50" cy="90" rx="7" ry="5" fill="#00838F"/>
+            <ellipse cx="128" cy="102" rx="24" ry="30" fill="#006064"/>
+            <polygon points="113,74 120,92 106,92" fill="#006064"/>
+            <polygon points="143,74 136,92 150,92" fill="#006064"/>
+            <ellipse cx="100" cy="148" rx="15" ry="12" fill="white"/>
+            <circle cx="88" cy="137" r="5.5" fill="white"/>
+            <circle cx="100" cy="132" r="5.5" fill="white"/>
+            <circle cx="112" cy="137" r="5.5" fill="white"/>
+            <circle cx="94" cy="129" r="4.5" fill="white"/>
+            <path d="M132 158 Q155 148 168 130" stroke="#00ACC1" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <polygon points="168 124 178 140 160 136" fill="#00ACC1"/>
+          </svg>
         </div>
         <h1>PetSwipe</h1>
         <p>Matching responsable de perros y gatos.<br>Compatibilidad real de estilo de vida<br>+ acompañamiento post-adopción.</p>
@@ -195,28 +301,61 @@
     <div class="screen" id="s2">
       <div class="header">
         <div class="back" onclick="go(1)">←</div>
-        <h2>Tu estilo de vida</h2>
+        <h2>Tu perfil y estilo de vida</h2>
       </div>
       <div class="form">
-        <div class="photo"><span>📷</span>Subir foto</div>
+        <div class="photo-box">
+          <div class="photo" id="photoPreview" onclick="document.getElementById('fotoInput').click()">
+            <span>📷</span>
+            Subir foto
+          </div>
+          <input type="file" id="fotoInput" accept="image/*" style="display:none" onchange="cargarFoto(event)">
+          <div class="photo-warning" id="photoWarning">
+            ⚠️ La foto debe mostrar tu cara completamente visible. No se aceptan fotos con mascarilla, gafas de sol o cara tapada.
+          </div>
+          <small style="color:var(--gris-texto);font-size:12px;">Foto de cara visible (obligatoria)</small>
+        </div>
+
+        <div>
+          <label>Nombre completo</label>
+          <input type="text" id="nombreCompleto" placeholder="Ej: Matías Andrés Pizarro López">
+        </div>
+        <div>
+          <label>Teléfono</label>
+          <input type="tel" id="telefono" placeholder="+56 9 1234 5678">
+        </div>
+        <div>
+          <label>Correo electrónico</label>
+          <input type="email" id="correo" placeholder="tu@correo.cl">
+        </div>
+        <div>
+          <label>Género</label>
+          <select id="genero">
+            <option value="">Selecciona...</option>
+            <option>Masculino</option>
+            <option>Femenino</option>
+            <option>No binario</option>
+            <option>Prefiero no decir</option>
+          </select>
+        </div>
         <div>
           <label>Edad</label>
-          <input type="number" value="28">
+          <input type="number" id="edad" value="28">
         </div>
         <div>
           <label>Ciudad / Comuna</label>
-          <input type="text" value="Talca, Maule">
+          <input type="text" id="ciudad" value="Talca, Maule">
         </div>
         <div>
           <label>Tipo de vivienda</label>
           <div class="radios">
-            <div class="radio active" onclick="this.parentNode.querySelectorAll('.radio').forEach(r=>r.classList.remove('active'));this.classList.add('active')">Casa</div>
-            <div class="radio" onclick="this.parentNode.querySelectorAll('.radio').forEach(r=>r.classList.remove('active'));this.classList.add('active')">Departamento</div>
+            <div class="radio active" onclick="selectRadio(this)">Casa</div>
+            <div class="radio" onclick="selectRadio(this)">Departamento</div>
           </div>
         </div>
         <div>
           <label>Ingreso líquido aproximado</label>
-          <select>
+          <select id="ingreso">
             <option>$400.000 - $600.000</option>
             <option selected>$600.000 - $900.000</option>
             <option>$900.000 - $1.200.000</option>
@@ -225,19 +364,19 @@
         </div>
         <div>
           <label>Horas semanales disponibles</label>
-          <input type="number" value="15">
+          <input type="number" id="horas" value="15">
         </div>
         <div>
           <label>¿Qué buscas en una mascota?</label>
-          <textarea>Compañía, alguien tranquilo que se adapte a mi rutina</textarea>
+          <textarea id="buscas">Compañía, alguien tranquilo que se adapte a mi rutina</textarea>
         </div>
         <div>
           <label>¿Qué puedes ofrecerle?</label>
-          <textarea>Tiempo de calidad, paseos diarios y mucho cariño</textarea>
+          <textarea id="ofreces">Tiempo de calidad, paseos diarios y mucho cariño</textarea>
         </div>
       </div>
       <div class="btn-bottom">
-        <button class="btn" onclick="generar()">Ver mis matches</button>
+        <button class="btn" onclick="validarYContinuar()">Ver mis matches</button>
       </div>
     </div>
 
@@ -297,7 +436,7 @@
         </div>
       </div>
       <div class="btn-bottom">
-        <button class="btn" onclick="go(6)">Ver seguimiento</button>
+        <button class="btn" onclick="finalizarAdopcion()">Finalizar adopción y ver seguimiento</button>
       </div>
     </div>
 
@@ -340,14 +479,17 @@
           <button class="btn" onclick="contacto()">Solicitar contacto</button>
         </div>
       </div>
+      <div class="btn-bottom">
+        <button class="btn" onclick="go(7)">Ir a mi perfil</button>
+      </div>
     </div>
 
-    <!-- 7. HOME -->
+    <!-- 7. HOME + RULETA -->
     <div class="screen" id="s7">
       <div class="profile">
-        <div class="avatar">MP</div>
-        <h2>Matías P.</h2>
-        <p style="font-size:13px;color:var(--gris-texto);margin-top:4px;">Talca, Maule · Casa · 15 hrs/semana</p>
+        <div class="avatar" id="avatarHome">MP</div>
+        <h2 id="nombreHome">Matías P.</h2>
+        <p style="font-size:13px;color:var(--gris-texto);margin-top:4px;" id="infoHome">Talca, Maule · Casa · 15 hrs/semana</p>
       </div>
       <div class="cards">
         <div class="card-home">
@@ -363,6 +505,20 @@
               <div style="font-size:12px;color:var(--gris-texto);">Etapa: Contacto</div>
             </div>
           </div>
+        </div>
+
+        <!-- RULETA -->
+        <div class="ruleta-box" id="ruletaBox" style="display:none;">
+          <h3>🎡 Ruleta de Premios PetSwipe</h3>
+          <p>¡Felicitaciones por completar tu adopción!<br>Gira la ruleta y gana un premio (solo 1 uso).</p>
+          
+          <div class="ruleta-container">
+            <div class="puntero"></div>
+            <div class="ruleta" id="ruleta"></div>
+          </div>
+          
+          <button class="btn-ruleta" id="btnGirar" onclick="girarRuleta()">¡Girar ruleta!</button>
+          <div class="premio-ganado" id="premioGanado"></div>
         </div>
       </div>
     </div>
@@ -391,12 +547,90 @@
     {n:"Duque",e:"7 años",s:"Macho",t:"Mediano",c:86,i:"https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&h=400&fit=crop",d:"Perro senior tranquilo.",temp:"Tranquilo y educado",conv:["Ideal para adultos"],h:"Duque solo busca cariño.",f:"Amigos de los Animales"}
   ];
 
+  const premios = [
+    { texto: "20% Dcto\nVeterinarias", color: "#00ACC1" },
+    { texto: "30% Dcto\nPedidosYa", color: "#43A047" },
+    { texto: "15% Dcto\nConsultas", color: "#EC407A" },
+    { texto: "Collar\nGratis", color: "#00838F" },
+    { texto: "25% Dcto\nAlimento", color: "#43A047" },
+    { texto: "Kit de\nBienvenida", color: "#00ACC1" },
+    { texto: "Sesión\nAdiestramiento", color: "#EC407A" },
+    { texto: "10% Dcto\nPet Shop", color: "#00838F" }
+  ];
+
   let actual = [];
+  let perfilCompleto = false;
+  let adopcionFinalizada = false;
+  let ruletaUsada = false;
+  let fotoCargada = false;
+
+  function crearRuleta() {
+    const ruleta = document.getElementById('ruleta');
+    ruleta.innerHTML = '';
+    const angulo = 360 / premios.length;
+    
+    premios.forEach((p, i) => {
+      const seg = document.createElement('div');
+      seg.className = 'segmento';
+      seg.style.background = p.color;
+      seg.style.transform = `rotate(${i * angulo}deg)`;
+      seg.innerHTML = `<span style="transform: rotate(${angulo/2}deg); display:block; width:80px;">${p.texto}</span>`;
+      ruleta.appendChild(seg);
+    });
+  }
 
   function go(n) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('s' + n).classList.add('active');
     window.scrollTo(0,0);
+    
+    if (n === 7) {
+      actualizarHome();
+      if (adopcionFinalizada && !ruletaUsada) {
+        document.getElementById('ruletaBox').style.display = 'block';
+        crearRuleta();
+      }
+    }
+  }
+
+  function selectRadio(el) {
+    el.parentNode.querySelectorAll('.radio').forEach(r => r.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function cargarFoto(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const preview = document.getElementById('photoPreview');
+      preview.innerHTML = `<img src="${ev.target.result}" alt="Foto">`;
+      fotoCargada = true;
+      document.getElementById('photoWarning').style.display = 'block';
+      document.getElementById('avatarHome').innerHTML = `<img src="${ev.target.result}">`;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function validarYContinuar() {
+    const nombre = document.getElementById('nombreCompleto').value.trim();
+    const tel = document.getElementById('telefono').value.trim();
+    const correo = document.getElementById('correo').value.trim();
+    const genero = document.getElementById('genero').value;
+    
+    if (!nombre) return alert('Por favor ingresa tu nombre completo');
+    if (!tel) return alert('Por favor ingresa tu teléfono');
+    if (!correo) return alert('Por favor ingresa tu correo');
+    if (!genero) return alert('Por favor selecciona tu género');
+    if (!fotoCargada) return alert('Por favor sube una foto de tu cara visible');
+    
+    document.getElementById('nombreHome').textContent = nombre.split(' ')[0] + ' ' + (nombre.split(' ')[1] || '');
+    document.getElementById('infoHome').textContent = document.getElementById('ciudad').value + ' · ' + 
+      (document.querySelector('.radio.active').textContent) + ' · ' + document.getElementById('horas').value + ' hrs/semana';
+    
+    perfilCompleto = true;
+    generar();
   }
 
   function generar() {
@@ -425,12 +659,6 @@
       lista.appendChild(div);
     });
     
-    // actualizar home
-    document.getElementById('home-count').textContent = actual.length;
-    document.getElementById('minis').innerHTML = actual.slice(0,6).map(p => 
-      `<div class="mini"><img src="${p.i}"><span>${p.n}</span></div>`
-    ).join('');
-    
     go(3);
   }
 
@@ -449,6 +677,42 @@
     document.getElementById('proc-nombre').textContent = p.n;
     document.getElementById('home-nombre').textContent = p.n;
     go(4);
+  }
+
+  function finalizarAdopcion() {
+    adopcionFinalizada = true;
+    go(6);
+  }
+
+  function actualizarHome() {
+    document.getElementById('home-count').textContent = actual.length;
+    document.getElementById('minis').innerHTML = actual.slice(0,6).map(p => 
+      `<div class="mini"><img src="${p.i}"><span>${p.n}</span></div>`
+    ).join('');
+  }
+
+  function girarRuleta() {
+    if (ruletaUsada) return;
+    
+    const btn = document.getElementById('btnGirar');
+    btn.disabled = true;
+    btn.textContent = 'Girando...';
+    
+    const ruleta = document.getElementById('ruleta');
+    const premioIndex = Math.floor(Math.random() * premios.length);
+    const anguloPorPremio = 360 / premios.length;
+    const vueltas = 5 + Math.random() * 3;
+    const anguloFinal = vueltas * 360 + (premioIndex * anguloPorPremio) + (anguloPorPremio / 2);
+    
+    ruleta.style.transform = `rotate(${anguloFinal}deg)`;
+    
+    setTimeout(() => {
+      const premio = premios[premioIndex];
+      document.getElementById('premioGanado').style.display = 'block';
+      document.getElementById('premioGanado').innerHTML = `¡Ganaste!<br><strong>${premio.texto.replace('\n', ' ')}</strong><br><small>Premio no acumulable · Válido por 30 días</small>`;
+      btn.textContent = 'Premio canjeado';
+      ruletaUsada = true;
+    }, 4200);
   }
 
   function contacto() {
