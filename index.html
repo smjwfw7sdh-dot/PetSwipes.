@@ -20,281 +20,241 @@
     .screen { display: none; min-height: 100vh; flex-direction: column; }
     .screen.active { display: flex; }
 
-    /* ===== SPLASH / INICIO ===== */
+    /* ===== INICIO ===== */
     .splash {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 36px 18px 30px;
-      background: linear-gradient(180deg, #E0F7FA 0%, #FFFFFF 42%);
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      padding: 32px 16px 24px;
+      background: linear-gradient(180deg, #E0F7FA 0%, #FFFFFF 40%);
       text-align: center;
     }
-    .logo svg { width: 100px; height: 100px; margin-bottom: 10px; }
-    .splash h1 { font-size: 30px; color: var(--primary); margin-bottom: 8px; }
-    .splash .value { font-size: 14px; color: var(--gris-texto); line-height: 1.45; margin-bottom: 24px; max-width: 290px; }
+    .logo svg { width: 90px; height: 90px; margin-bottom: 8px; }
+    .splash h1 { font-size: 28px; color: var(--primary); margin-bottom: 6px; }
+    .splash .value { font-size: 13px; color: var(--gris-texto); line-height: 1.4; margin-bottom: 20px; }
 
     .btn-paw {
       background: none; border: none; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      margin-bottom: 28px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      margin-bottom: 22px;
     }
     .paw {
-      width: 80px; height: 80px; background: var(--primary); border-radius: 50%;
+      width: 76px; height: 76px; background: var(--primary); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 20px rgba(0,172,193,0.35);
+      box-shadow: 0 8px 18px rgba(0,172,193,0.35);
     }
-    .paw svg { width: 32px; height: 32px; fill: white; }
-    .btn-paw span { font-size: 14px; font-weight: 600; color: var(--primary); }
+    .paw svg { width: 30px; height: 30px; fill: white; }
+    .btn-paw span { font-size: 13px; font-weight: 600; color: var(--primary); }
 
-    /* Tarjetas de inicio */
-    .home-cards { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+    .home-cards { width: 100%; display: flex; flex-direction: column; gap: 11px; }
     .home-card {
-      background: white;
-      border-radius: 14px;
-      padding: 14px 16px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-      border: 1px solid #f0f0f0;
-      text-align: left;
+      background: white; border-radius: 14px; padding: 13px 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06); border: 1px solid #f0f0f0;
+      text-align: left; cursor: pointer;
     }
     .home-card h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      font-size: 14px; font-weight: 600; margin-bottom: 8px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .badge {
-      font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 600;
-    }
+    .badge { font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 600; }
     .badge.verde { background: #E8F5E9; color: var(--verde); }
     .badge.amarillo { background: #FFF8E1; color: #F9A825; }
     .badge.azul { background: #E0F7FA; color: var(--primary); }
 
     .cupon {
-      background: #F8FAFC;
-      border: 1px dashed #cbd5e1;
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: #F8FAFC; border: 1px dashed #cbd5e1; border-radius: 10px;
+      padding: 9px 11px; margin-bottom: 7px;
+      display: flex; justify-content: space-between; align-items: center;
     }
     .cupon:last-child { margin-bottom: 0; }
-    .cupon-info { font-size: 13px; }
-    .cupon-info strong { display: block; margin-bottom: 2px; font-size: 13px; }
+    .cupon-info strong { display: block; font-size: 13px; margin-bottom: 1px; }
     .codigo {
-      background: var(--primary);
-      color: white;
-      font-weight: 700;
-      font-size: 12px;
-      padding: 5px 9px;
-      border-radius: 7px;
-      letter-spacing: 1px;
+      background: var(--primary); color: white; font-weight: 700;
+      font-size: 12px; padding: 4px 8px; border-radius: 6px; letter-spacing: 1px;
     }
 
-    .match-mini {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-    .match-item {
-      flex-shrink: 0;
-      width: 64px;
-      text-align: center;
-    }
-    .match-item img {
-      width: 58px; height: 58px;
-      border-radius: 12px;
-      object-fit: cover;
-      margin-bottom: 4px;
-    }
+    .match-mini { display: flex; gap: 9px; overflow-x: auto; }
+    .match-item { flex-shrink: 0; width: 60px; text-align: center; }
+    .match-item img { width: 54px; height: 54px; border-radius: 11px; object-fit: cover; margin-bottom: 3px; }
     .match-item span { font-size: 11px; color: var(--gris-texto); }
 
-    /* ===== RESTO DE PANTALLAS ===== */
+    /* ===== HEADER ===== */
     .header {
-      padding: 14px 18px;
-      border-bottom: 1px solid #eee;
-      display: flex; align-items: center; gap: 12px;
+      padding: 13px 16px; border-bottom: 1px solid #eee;
+      display: flex; align-items: center; gap: 11px;
       position: sticky; top: 0; background: white; z-index: 10;
     }
     .back {
-      width: 38px; height: 38px; border-radius: 50%; background: var(--gris);
+      width: 36px; height: 36px; border-radius: 50%; background: var(--gris);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; cursor: pointer;
+      font-size: 17px; cursor: pointer;
     }
-    .header h2 { font-size: 17px; font-weight: 600; }
+    .header h2 { font-size: 16px; font-weight: 600; }
 
-    .form { padding: 20px 18px; flex: 1; display: flex; flex-direction: column; gap: 15px; }
-    .photo-box { text-align: center; }
+    /* FORM */
+    .form { padding: 18px 16px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
     .photo {
-      width: 105px; height: 105px; border-radius: 50%; background: var(--gris);
-      border: 3px dashed #ccc; margin: 0 auto 8px;
+      width: 100px; height: 100px; border-radius: 50%; background: var(--gris);
+      border: 3px dashed #ccc; margin: 0 auto 6px;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: var(--gris-texto); font-size: 13px; cursor: pointer; overflow: hidden;
+      color: var(--gris-texto); font-size: 12px; cursor: pointer; overflow: hidden;
     }
     .photo img { width: 100%; height: 100%; object-fit: cover; }
-    .photo span { font-size: 24px; }
+    .photo span { font-size: 22px; }
     .photo-warning {
       font-size: 12px; color: #c62828; background: #fef2f2;
-      padding: 8px 12px; border-radius: 8px; margin-top: 6px; display: none;
+      padding: 7px 10px; border-radius: 8px; margin-top: 5px; display: none; text-align: center;
     }
-    label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 5px; }
+    label { font-size: 13px; font-weight: 500; display: block; margin-bottom: 4px; }
     input, select, textarea {
-      width: 100%; padding: 12px 14px; border: 1.5px solid #e5e5e5;
-      border-radius: 11px; font-size: 15px; font-family: inherit;
+      width: 100%; padding: 11px 13px; border: 1.5px solid #e5e5e5;
+      border-radius: 10px; font-size: 14px; font-family: inherit;
     }
     input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
-    textarea { min-height: 68px; resize: none; }
-    .radios { display: flex; gap: 10px; }
+    textarea { min-height: 64px; resize: none; }
+    .radios { display: flex; gap: 9px; }
     .radio {
-      flex: 1; padding: 11px; border: 1.5px solid #e5e5e5; border-radius: 11px;
-      text-align: center; font-size: 14px; font-weight: 500; cursor: pointer;
+      flex: 1; padding: 10px; border: 1.5px solid #e5e5e5; border-radius: 10px;
+      text-align: center; font-size: 13px; font-weight: 500; cursor: pointer;
     }
     .radio.active { border-color: var(--primary); background: #E0F7FA; color: var(--primary); }
-    .btn-bottom { padding: 14px 18px 26px; border-top: 1px solid #eee; }
+    .btn-bottom { padding: 13px 16px 24px; border-top: 1px solid #eee; }
     .btn {
-      background: var(--primary); color: white; border: none; padding: 14px;
-      border-radius: 13px; font-size: 15px; font-weight: 600; width: 100%;
+      background: var(--primary); color: white; border: none; padding: 13px;
+      border-radius: 12px; font-size: 15px; font-weight: 600; width: 100%;
       cursor: pointer; box-shadow: 0 4px 12px rgba(0,172,193,0.3);
     }
 
-    .matches-header { padding: 12px 18px 6px; font-size: 13px; color: var(--gris-texto); }
-    .matches { padding: 8px 18px 30px; display: flex; flex-direction: column; gap: 14px; }
+    /* MATCHES */
+    .matches-header { padding: 10px 16px 5px; font-size: 13px; color: var(--gris-texto); }
+    .matches { padding: 6px 16px 24px; display: flex; flex-direction: column; gap: 12px; }
     .card {
-      background: white; border-radius: 15px; overflow: hidden;
-      box-shadow: 0 3px 14px rgba(0,0,0,0.07); border: 1px solid #f0f0f0; cursor: pointer;
+      background: white; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07); border: 1px solid #f0f0f0; cursor: pointer;
     }
-    .card img { width: 100%; height: 175px; object-fit: cover; }
-    .card-body { padding: 13px; }
-    .card-top { display: flex; justify-content: space-between; margin-bottom: 4px; }
-    .card h3 { font-size: 16px; }
-    .compat { background: #E8F5E9; color: var(--verde); font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
-    .meta { font-size: 12px; color: var(--gris-texto); margin-bottom: 5px; }
-    .desc { font-size: 13px; margin-bottom: 7px; line-height: 1.4; }
-    .fund { font-size: 12px; color: var(--gris-texto); }
+    .card img { width: 100%; height: 165px; object-fit: cover; }
+    .card-body { padding: 12px; }
+    .card-top { display: flex; justify-content: space-between; margin-bottom: 3px; }
+    .card h3 { font-size: 15px; }
+    .compat { background: #E8F5E9; color: var(--verde); font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 20px; }
+    .meta { font-size: 12px; color: var(--gris-texto); margin-bottom: 4px; }
+    .desc { font-size: 13px; margin-bottom: 6px; line-height: 1.35; }
+    .fund { font-size: 11px; color: var(--gris-texto); }
     .fund::before { content: "✓ "; color: var(--verde); font-weight: 700; }
 
-    .hero { width: 100%; height: 250px; object-fit: cover; }
-    .detail { padding: 18px; }
-    .detail h2 { font-size: 23px; margin-bottom: 8px; }
-    .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
-    .tag { background: var(--gris); font-size: 12px; padding: 5px 10px; border-radius: 20px; }
-    .section { margin-bottom: 15px; }
-    .section h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .section p, .section ul { font-size: 13px; color: var(--gris-texto); line-height: 1.5; }
+    /* DETALLE */
+    .hero { width: 100%; height: 240px; object-fit: cover; }
+    .detail { padding: 16px; }
+    .detail h2 { font-size: 22px; margin-bottom: 7px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .tag { background: var(--gris); font-size: 12px; padding: 4px 9px; border-radius: 20px; }
+    .section { margin-bottom: 13px; }
+    .section h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .section p, .section ul { font-size: 13px; color: var(--gris-texto); line-height: 1.45; }
     .section ul { list-style: none; }
-    .section li { margin-bottom: 3px; }
+    .section li { margin-bottom: 2px; }
     .section li::before { content: "✓ "; color: var(--verde); font-weight: 700; }
 
-    .process { padding: 28px 20px; text-align: center; flex: 1; }
-    .icon { width: 72px; height: 72px; background: #E8F5E9; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 32px; }
-    .steps { display: flex; justify-content: space-between; position: relative; margin: 26px 0 28px; }
-    .steps::before { content: ""; position: absolute; top: 15px; left: 26px; right: 26px; height: 3px; background: #e5e5e5; }
-    .step { display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1; width: 66px; }
-    .circle { width: 32px; height: 32px; border-radius: 50%; background: #e5e5e5; color: var(--gris-texto);
-      display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; }
+    /* PROCESO */
+    .process { padding: 24px 18px; text-align: center; flex: 1; }
+    .icon { width: 68px; height: 68px; background: #E8F5E9; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 30px; }
+    .steps { display: flex; justify-content: space-between; position: relative; margin: 22px 0 24px; }
+    .steps::before { content: ""; position: absolute; top: 14px; left: 24px; right: 24px; height: 3px; background: #e5e5e5; }
+    .step { display: flex; flex-direction: column; align-items: center; gap: 5px; z-index: 1; width: 64px; }
+    .circle { width: 30px; height: 30px; border-radius: 50%; background: #e5e5e5; color: var(--gris-texto);
+      display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px; }
     .step.active .circle, .step.done .circle { background: var(--verde); color: white; }
     .step span { font-size: 11px; color: var(--gris-texto); }
     .step.active span { color: var(--verde); font-weight: 600; }
-    .info { background: #E8F5E9; border-radius: 13px; padding: 13px; text-align: left; font-size: 13px; line-height: 1.5; }
+    .info { background: #E8F5E9; border-radius: 12px; padding: 12px; text-align: left; font-size: 13px; line-height: 1.45; }
 
-    .follow { padding: 18px; flex: 1; }
-    .timeline { display: flex; gap: 13px; margin-bottom: 18px; position: relative; }
-    .timeline:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 30px; bottom: -18px; width: 2px; background: #e5e5e5; }
-    .dot { width: 28px; height: 28px; border-radius: 50%; background: #e5e5e5;
+    /* SEGUIMIENTO + RULETA */
+    .follow { padding: 16px; }
+    .timeline { display: flex; gap: 12px; margin-bottom: 16px; position: relative; }
+    .timeline:not(:last-child)::after { content: ""; position: absolute; left: 12px; top: 28px; bottom: -16px; width: 2px; background: #e5e5e5; }
+    .dot { width: 26px; height: 26px; border-radius: 50%; background: #e5e5e5;
       display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
     .timeline.done .dot { background: var(--verde); color: white; }
     .timeline.current .dot { background: var(--primary); color: white; }
     .timeline h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
     .timeline p { font-size: 12px; color: var(--gris-texto); }
-    .contact { background: #E0F7FA; border-radius: 13px; padding: 16px; margin-top: 8px; }
-    .contact h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .contact p { font-size: 12px; color: var(--gris-texto); margin-bottom: 10px; line-height: 1.4; }
-    .contact input { margin-bottom: 9px; }
 
-    /* RULETA mejorada */
     .ruleta-box {
       background: linear-gradient(135deg, #E0F7FA, #E8F5E9);
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
-      border: 2px solid #B2EBF2;
-      margin: 16px;
+      border-radius: 16px; padding: 16px; text-align: center;
+      border: 2px solid #B2EBF2; margin: 0 16px 20px;
     }
-    .ruleta-box h3 { font-size: 16px; margin-bottom: 6px; color: var(--primary); }
-    .ruleta-box p { font-size: 13px; color: var(--gris-texto); margin-bottom: 14px; }
-    .ruleta-container {
-      width: 250px; height: 250px;
-      margin: 0 auto 14px;
-      position: relative;
-    }
+    .ruleta-box h3 { font-size: 15px; margin-bottom: 4px; color: var(--primary); }
+    .ruleta-box p { font-size: 12px; color: var(--gris-texto); margin-bottom: 12px; }
+    .ruleta-container { width: 240px; height: 240px; margin: 0 auto 12px; position: relative; }
     .ruleta {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      border: 5px solid var(--primary);
-      position: relative;
-      overflow: hidden;
-      transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+      width: 100%; height: 100%; border-radius: 50%;
+      border: 5px solid var(--primary); position: relative; overflow: hidden;
+      transition: transform 4.2s cubic-bezier(0.17, 0.67, 0.12, 0.99);
     }
     .segmento {
-      position: absolute;
-      width: 50%; height: 50%;
+      position: absolute; width: 50%; height: 50%;
       transform-origin: 100% 100%;
       clip-path: polygon(0 0, 100% 0, 100% 100%);
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 18px;
-      font-size: 11px;
-      font-weight: 600;
-      color: white;
-      text-align: center;
-      line-height: 1.25;
+      display: flex; align-items: flex-start; justify-content: center;
+      padding-top: 14px; font-size: 11px; font-weight: 700; color: white;
+      text-align: center; line-height: 1.2;
     }
     .puntero {
-      position: absolute;
-      top: -10px; left: 50%;
-      transform: translateX(-50%);
+      position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
       width: 0; height: 0;
-      border-left: 11px solid transparent;
-      border-right: 11px solid transparent;
-      border-top: 18px solid var(--primary);
-      z-index: 10;
+      border-left: 10px solid transparent; border-right: 10px solid transparent;
+      border-top: 16px solid var(--primary); z-index: 10;
     }
     .btn-ruleta {
       background: var(--primary); color: white; border: none;
-      padding: 11px 22px; border-radius: 30px; font-weight: 600;
+      padding: 10px 20px; border-radius: 30px; font-weight: 600;
       cursor: pointer; font-size: 14px;
     }
     .btn-ruleta:disabled { background: #ccc; cursor: not-allowed; }
     .premio-ganado {
-      margin-top: 12px; padding: 11px;
-      background: #E8F5E9; border-radius: 11px;
-      color: var(--verde); font-weight: 600; display: none;
+      margin-top: 10px; padding: 10px; background: #E8F5E9;
+      border-radius: 10px; color: var(--verde); font-weight: 600; display: none;
     }
     .btn-inicio {
-      margin-top: 12px;
-      background: white;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 14px;
+      margin-top: 10px; background: white; color: var(--primary);
+      border: 2px solid var(--primary); padding: 9px 18px;
+      border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 13px;
       display: none;
     }
+
+    /* NUEVA PANTALLA: ESTADO DE SOLICITUDES */
+    .solicitud-item {
+      background: white; border-radius: 14px; padding: 14px;
+      margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #f0f0f0;
+    }
+    .solicitud-top {
+      display: flex; gap: 12px; align-items: center; margin-bottom: 10px;
+    }
+    .solicitud-top img {
+      width: 56px; height: 56px; border-radius: 12px; object-fit: cover;
+    }
+    .solicitud-info h4 { font-size: 15px; margin-bottom: 2px; }
+    .solicitud-info p { font-size: 12px; color: var(--gris-texto); }
+    .mini-steps {
+      display: flex; justify-content: space-between; margin-top: 8px;
+    }
+    .mini-step {
+      flex: 1; text-align: center; font-size: 10px; color: var(--gris-texto);
+    }
+    .mini-step .dot2 {
+      width: 18px; height: 18px; border-radius: 50%; background: #e5e5e5;
+      margin: 0 auto 3px; display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: white;
+    }
+    .mini-step.done .dot2 { background: var(--verde); }
+    .mini-step.current .dot2 { background: var(--primary); }
   </style>
 </head>
 <body>
   <div class="app">
 
-    <!-- 1. PANTALLA PRINCIPAL -->
+    <!-- 1. INICIO -->
     <div class="screen active" id="s1">
       <div class="splash">
         <div class="logo">
@@ -316,7 +276,7 @@
           </svg>
         </div>
         <h1>PetSwipe</h1>
-        <p class="value">Matching responsable de perros y gatos.<br>Compatibilidad real + acompañamiento post-adopción.</p>
+        <p class="value">Matching responsable de perros y gatos.<br>Compatibilidad real + acompañamiento.</p>
 
         <button class="btn-paw" onclick="go(2)">
           <div class="paw">
@@ -325,34 +285,24 @@
           <span>Comenzar</span>
         </button>
 
-        <!-- Tarjetas que aparecen después del proceso -->
         <div class="home-cards" id="homeCards" style="display:none;">
-          
-          <!-- 1. Mis Cupones -->
-          <div class="home-card" id="cuponesCard">
-            <h3>Mis Cupones <span class="badge azul" id="cuponesBadge">0</span></h3>
-            <div id="listaCupones">
-              <p style="font-size:13px;color:var(--gris-texto);">Aún no tienes cupones</p>
-            </div>
-          </div>
-
-          <!-- 2. Estado de Solicitud -->
+          <!-- Cupones -->
           <div class="home-card">
-            <h3>Estado de mi Solicitud</h3>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="flex:1;">
-                <div style="font-weight:600;font-size:14px;" id="solicitudTitulo">Sin solicitud activa</div>
-                <div style="font-size:12px;color:var(--gris-texto);" id="solicitudDesc">Completa el proceso de adopción</div>
-              </div>
-              <span class="badge" id="solicitudBadge">—</span>
-            </div>
+            <h3>Mis Cupones <span class="badge azul" id="cuponesBadge">0</span></h3>
+            <div id="listaCupones"><p style="font-size:13px;color:var(--gris-texto)">Aún no tienes cupones</p></div>
           </div>
 
-          <!-- 3. Matches guardados -->
+          <!-- Estado Solicitud (clickeable) -->
+          <div class="home-card" onclick="go(7)">
+            <h3>Estado de mi Solicitud <span style="font-size:12px;color:var(--primary)">Ver →</span></h3>
+            <div style="font-size:13px;" id="solicitudResumen">Sin solicitudes activas</div>
+          </div>
+
+          <!-- Matches guardados -->
           <div class="home-card">
             <h3>Matches guardados <span class="badge azul" id="matchesBadge">0</span></h3>
             <div class="match-mini" id="matchesMini">
-              <p style="font-size:13px;color:var(--gris-texto);">Aún no tienes matches</p>
+              <p style="font-size:13px;color:var(--gris-texto)">Aún no tienes matches</p>
             </div>
           </div>
         </div>
@@ -363,30 +313,19 @@
     <div class="screen" id="s2">
       <div class="header">
         <div class="back" onclick="go(1)">←</div>
-        <h2>Tu perfil y estilo de vida</h2>
+        <h2>Tu perfil</h2>
       </div>
       <div class="form">
-        <div class="photo-box">
+        <div style="text-align:center">
           <div class="photo" id="photoPreview" onclick="document.getElementById('fotoInput').click()">
             <span>📷</span>Subir foto
           </div>
           <input type="file" id="fotoInput" accept="image/*" style="display:none" onchange="cargarFoto(event)">
-          <div class="photo-warning" id="photoWarning">
-            ⚠️ La foto debe mostrar tu cara completamente visible.
-          </div>
+          <div class="photo-warning" id="photoWarning">⚠️ La foto debe mostrar tu cara visible</div>
         </div>
-        <div>
-          <label>Nombre completo</label>
-          <input type="text" id="nombreCompleto" placeholder="Ej: Matías Andrés Pizarro">
-        </div>
-        <div>
-          <label>Teléfono</label>
-          <input type="tel" id="telefono" placeholder="+56 9 1234 5678">
-        </div>
-        <div>
-          <label>Correo electrónico</label>
-          <input type="email" id="correo" placeholder="tu@correo.cl">
-        </div>
+        <div><label>Nombre completo</label><input type="text" id="nombreCompleto" placeholder="Nombre completo"></div>
+        <div><label>Teléfono</label><input type="tel" id="telefono" placeholder="+56 9 1234 5678"></div>
+        <div><label>Correo</label><input type="email" id="correo" placeholder="tu@correo.cl"></div>
         <div>
           <label>Género</label>
           <select id="genero">
@@ -397,14 +336,8 @@
             <option>Prefiero no decir</option>
           </select>
         </div>
-        <div>
-          <label>Edad</label>
-          <input type="number" id="edad" value="28">
-        </div>
-        <div>
-          <label>Ciudad / Comuna</label>
-          <input type="text" id="ciudad" value="Talca, Maule">
-        </div>
+        <div><label>Edad</label><input type="number" value="28"></div>
+        <div><label>Ciudad / Comuna</label><input type="text" value="Talca, Maule"></div>
         <div>
           <label>Tipo de vivienda</label>
           <div class="radios">
@@ -413,25 +346,8 @@
           </div>
         </div>
         <div>
-          <label>Ingreso líquido aproximado</label>
-          <select>
-            <option>$400.000 - $600.000</option>
-            <option selected>$600.000 - $900.000</option>
-            <option>$900.000 - $1.200.000</option>
-            <option>Más de $1.200.000</option>
-          </select>
-        </div>
-        <div>
-          <label>Horas semanales disponibles</label>
-          <input type="number" value="15">
-        </div>
-        <div>
           <label>¿Qué buscas en una mascota?</label>
           <textarea>Compañía, alguien tranquilo</textarea>
-        </div>
-        <div>
-          <label>¿Qué puedes ofrecerle?</label>
-          <textarea>Tiempo de calidad y mucho cariño</textarea>
         </div>
       </div>
       <div class="btn-bottom">
@@ -443,7 +359,7 @@
     <div class="screen" id="s3">
       <div class="header">
         <div class="back" onclick="go(2)">←</div>
-        <h2>Tus matches compatibles</h2>
+        <h2>Tus matches</h2>
       </div>
       <div class="matches-header" id="count">Cargando...</div>
       <div class="matches" id="lista"></div>
@@ -458,17 +374,13 @@
         <div class="section"><h4>Temperamento</h4><p id="temp"></p></div>
         <div class="section"><h4>Convivencia</h4><ul id="conv"></ul></div>
         <div class="section"><h4>Estado de salud</h4>
-          <ul>
-            <li>Esterilizado / Castrado</li>
-            <li>Vacunas al día</li>
-            <li>Microchip instalado</li>
-          </ul>
+          <ul><li>Esterilizado</li><li>Vacunas al día</li><li>Microchip</li></ul>
         </div>
-        <div class="section"><h4>Su historia</h4><p id="hist"></p></div>
+        <div class="section"><h4>Historia</h4><p id="hist"></p></div>
         <div class="section"><h4>Publicado por</h4><p style="color:var(--verde);font-weight:500" id="fund"></p></div>
       </div>
       <div class="btn-bottom">
-        <button class="btn" onclick="go(5)">Quiero conocerlo</button>
+        <button class="btn" onclick="iniciarProceso()">Quiero conocerlo</button>
       </div>
     </div>
 
@@ -481,7 +393,7 @@
       <div class="process">
         <div class="icon">🎉</div>
         <h2>¡Match exitoso!</h2>
-        <p style="margin:8px 0 0;color:var(--gris-texto)">Has iniciado el proceso con <strong id="proc-nombre">Max</strong></p>
+        <p style="margin-top:6px;color:var(--gris-texto)">Proceso iniciado con <strong id="proc-nombre">Max</strong></p>
         <div class="steps">
           <div class="step done"><div class="circle">1</div><span>Match</span></div>
           <div class="step active"><div class="circle">2</div><span>Contacto</span></div>
@@ -489,12 +401,12 @@
           <div class="step"><div class="circle">4</div><span>Adopción</span></div>
         </div>
         <div class="info">
-          <strong>PetSwipe + la fundación</strong><br>
+          <strong>PetSwipe + Fundación</strong><br>
           Te acompañamos en todo el proceso.
         </div>
       </div>
       <div class="btn-bottom">
-        <button class="btn" onclick="finalizarAdopcion()">Finalizar adopción</button>
+        <button class="btn" onclick="finalizarAdopcion()">Finalizar y ver premios</button>
       </div>
     </div>
 
@@ -504,34 +416,23 @@
         <div class="back" onclick="go(5)">←</div>
         <h2>Seguimiento + Premios</h2>
       </div>
+      
       <div class="follow">
-        <p style="font-size:14px;color:var(--gris-texto);margin-bottom:16px;">Acompañamos a las familias durante los primeros meses.</p>
-        
         <div class="timeline done">
           <div class="dot">✓</div>
-          <div>
-            <h4>Mes 1 – Completado</h4>
-            <p>Primera visita realizada.</p>
-          </div>
+          <div><h4>Mes 1 – Completado</h4><p>Primera visita realizada</p></div>
         </div>
         <div class="timeline current">
           <div class="dot">3</div>
-          <div>
-            <h4>Mes 3 – Próximo</h4>
-            <p>Te contactaremos pronto.</p>
-          </div>
+          <div><h4>Mes 3 – Próximo</h4><p>Te contactaremos pronto</p></div>
         </div>
         <div class="timeline">
           <div class="dot">6</div>
-          <div>
-            <h4>Mes 6 – Pendiente</h4>
-            <p>Evaluación final.</p>
-          </div>
+          <div><h4>Mes 6 – Pendiente</h4><p>Evaluación final</p></div>
         </div>
       </div>
 
-      <!-- RULETA -->
-      <div class="ruleta-box" id="ruletaBox">
+      <div class="ruleta-box">
         <h3>🎡 Ruleta de Premios</h3>
         <p>¡Felicitaciones por tu adopción!<br>Gira y gana un premio (solo 1 uso)</p>
         
@@ -546,6 +447,17 @@
       </div>
     </div>
 
+    <!-- 7. ESTADO DE SOLICITUDES (nueva) -->
+    <div class="screen" id="s7">
+      <div class="header">
+        <div class="back" onclick="go(1)">←</div>
+        <h2>Mis Solicitudes</h2>
+      </div>
+      <div style="padding:16px;" id="listaSolicitudes">
+        <p style="text-align:center;color:var(--gris-texto);margin-top:40px;">Aún no tienes solicitudes</p>
+      </div>
+    </div>
+
   </div>
 
 <script>
@@ -556,44 +468,43 @@
     {n:"Mía",e:"1 año",s:"Hembra",t:"Pequeña",c:89,i:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop",d:"Cachorra alegre.",temp:"Alegre",conv:["Perfecta para familias"],h:"Mía está llena de energía.",f:"Fundación Huellitas Talca"},
     {n:"Simba",e:"5 años",s:"Macho",t:"Mediano",c:85,i:"https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=400&fit=crop",d:"Gato tranquilo.",temp:"Tranquilo",conv:["Ideal para departamento"],h:"Simba busca hogar calmado.",f:"Protectora Animal Maule"},
     {n:"Rocky",e:"6 años",s:"Macho",t:"Grande",c:82,i:"https://images.unsplash.com/photo-1561037404-61cd46aa613b?w=600&h=400&fit=crop",d:"Perro maduro.",temp:"Calmado",conv:["Excelente con niños"],h:"Rocky es muy educado.",f:"Amigos de los Animales"},
-    {n:"Nala",e:"3 años",s:"Hembra",t:"Mediana",c:90,i:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=400&fit=crop",d:"Cariñosa y equilibrada.",temp:"Equilibrada",conv:["Compatible con niños"],h:"Nala se adapta fácil.",f:"Fundación Huellitas Talca"},
+    {n:"Nala",e:"3 años",s:"Hembra",t:"Mediana",c:90,i:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=400&fit=crop",d:"Cariñosa.",temp:"Equilibrada",conv:["Compatible con niños"],h:"Nala se adapta fácil.",f:"Fundación Huellitas Talca"},
     {n:"Cleo",e:"2 años",s:"Hembra",t:"Pequeña",c:88,i:"https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&h=400&fit=crop",d:"Gata curiosa.",temp:"Curiosa",conv:["Ideal para departamento"],h:"Cleo tiene personalidad.",f:"Protectora Animal Maule"},
     {n:"Bruno",e:"4 años",s:"Macho",t:"Mediano",c:86,i:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&h=400&fit=crop",d:"Leal y protector.",temp:"Protector",conv:["Bueno con niños"],h:"Bruno busca familia.",f:"Amigos de los Animales"},
-    {n:"Lola",e:"1 año",s:"Hembra",t:"Pequeña",c:93,i:"https://images.unsplash.com/photo-1591160690555-5debfba289f0?w=600&h=400&fit=crop",d:"Dulce y juguetona.",temp:"Dulce",conv:["Ideal para cualquier hogar"],h:"Lola es inteligente.",f:"Fundación Huellitas Talca"},
-    {n:"Thor",e:"3 años",s:"Macho",t:"Grande",c:84,i:"https://images.unsplash.com/photo-1477884213360-7e9d7dcc04e7?w=600&h=400&fit=crop",d:"Fuerte y noble.",temp:"Noble",conv:["Necesita espacio"],h:"Thor es de gran corazón.",f:"Amigos de los Animales"},
-    {n:"Misha",e:"4 años",s:"Hembra",t:"Mediana",c:87,i:"https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=600&h=400&fit=crop",d:"Independiente.",temp:"Independiente",conv:["Ideal para departamento"],h:"Misha busca ser la reina.",f:"Protectora Animal Maule"}
+    {n:"Lola",e:"1 año",s:"Hembra",t:"Pequeña",c:93,i:"https://images.unsplash.com/photo-1591160690555-5debfba289f0?w=600&h=400&fit=crop",d:"Dulce y juguetona.",temp:"Dulce",conv:["Ideal para cualquier hogar"],h:"Lola es inteligente.",f:"Fundación Huellitas Talca"}
   ];
 
-  // Premios más cortos y legibles
+  // Premios cortos y claros
   const premios = [
     { texto: "20% Vet", color: "#00ACC1" },
-    { texto: "30% PedidosYa", color: "#43A047" },
+    { texto: "30% Ya", color: "#43A047" },
     { texto: "15% Clínica", color: "#EC407A" },
-    { texto: "Collar Gratis", color: "#00838F" },
-    { texto: "25% Alimento", color: "#43A047" },
-    { texto: "Kit Bienvenida", color: "#00ACC1" },
-    { texto: "Adiestramiento", color: "#EC407A" },
-    { texto: "10% Pet Shop", color: "#00838F" }
+    { texto: "Collar", color: "#00838F" },
+    { texto: "25% Food", color: "#43A047" },
+    { texto: "Kit Bienv.", color: "#00ACC1" },
+    { texto: "Adiestra.", color: "#EC407A" },
+    { texto: "10% Shop", color: "#00838F" }
   ];
 
   let actual = [];
   let cupones = [];
-  let adopcionFinalizada = false;
+  let solicitudes = [];      // mascotas con las que se inició proceso
   let ruletaUsada = false;
   let fotoCargada = false;
-  let mascotaAdoptada = null;
+  let currentPet = null;
 
   function crearRuleta() {
     const ruleta = document.getElementById('ruleta');
     ruleta.innerHTML = '';
-    const angulo = 360 / premios.length;
+    const total = premios.length;
+    const angulo = 360 / total;
     
     premios.forEach((p, i) => {
       const seg = document.createElement('div');
       seg.className = 'segmento';
       seg.style.background = p.color;
       seg.style.transform = `rotate(${i * angulo}deg)`;
-      seg.innerHTML = `<span style="transform: rotate(${angulo/2}deg);">${p.texto}</span>`;
+      seg.innerHTML = `<span style="transform: rotate(${angulo/2}deg); display:inline-block;">${p.texto}</span>`;
       ruleta.appendChild(seg);
     });
   }
@@ -612,6 +523,7 @@
     
     if (n === 1) actualizarInicio();
     if (n === 6) crearRuleta();
+    if (n === 7) mostrarSolicitudes();
   }
 
   function selectRadio(el) {
@@ -637,10 +549,7 @@
     const correo = document.getElementById('correo').value.trim();
     const genero = document.getElementById('genero').value;
     
-    if (!nombre) return alert('Ingresa tu nombre completo');
-    if (!tel) return alert('Ingresa tu teléfono');
-    if (!correo) return alert('Ingresa tu correo');
-    if (!genero) return alert('Selecciona tu género');
+    if (!nombre || !tel || !correo || !genero) return alert('Completa todos los campos obligatorios');
     if (!fotoCargada) return alert('Sube una foto de tu cara visible');
     
     generar();
@@ -648,7 +557,7 @@
 
   function generar() {
     const shuffled = [...pets].sort(() => Math.random() - 0.5);
-    actual = shuffled.slice(0, 10 + Math.floor(Math.random()*3)).sort((a,b) => b.c - a.c);
+    actual = shuffled.slice(0, 9).sort((a,b) => b.c - a.c);
     
     document.getElementById('count').textContent = `Encontramos ${actual.length} matches`;
     const lista = document.getElementById('lista');
@@ -675,7 +584,7 @@
   }
 
   function detalle(p) {
-    mascotaAdoptada = p;
+    currentPet = p;
     document.getElementById('img').src = p.i;
     document.getElementById('nombre').textContent = p.n;
     document.getElementById('tags').innerHTML = `
@@ -691,8 +600,22 @@
     go(4);
   }
 
+  function iniciarProceso() {
+    // Guardar la solicitud
+    const existe = solicitudes.find(s => s.n === currentPet.n);
+    if (!existe) {
+      solicitudes.push({
+        ...currentPet,
+        estado: 2 // 1=Match, 2=Contacto, 3=Visita, 4=Adopción
+      });
+    }
+    go(5);
+  }
+
   function finalizarAdopcion() {
-    adopcionFinalizada = true;
+    // Actualizar estado a más avanzado
+    const sol = solicitudes.find(s => s.n === currentPet.n);
+    if (sol) sol.estado = 3;
     go(6);
   }
 
@@ -703,75 +626,73 @@
     btn.disabled = true;
     btn.textContent = 'Girando...';
     
-    const ruleta = document.getElementById('ruleta');
-    const premioIndex = Math.floor(Math.random() * premios.length);
-    const anguloPorPremio = 360 / premios.length;
-    const vueltas = 5 + Math.random() * 3;
-    const anguloFinal = vueltas * 360 + (premioIndex * anguloPorPremio) + (anguloPorPremio / 2);
+    const total = premios.length;
+    const anguloPorPremio = 360 / total;
     
+    // Elegimos el índice ganador primero
+    const premioIndex = Math.floor(Math.random() * total);
+    
+    // Calculamos cuánto debe girar para que ese segmento quede arriba (bajo el puntero)
+    // El segmento 0 está en la posición inicial. Necesitamos que el centro del segmento ganador quede en 0° (arriba)
+    const vueltas = 5 + Math.random() * 2;
+    const anguloFinal = vueltas * 360 + (360 - (premioIndex * anguloPorPremio + anguloPorPremio / 2));
+    
+    const ruleta = document.getElementById('ruleta');
     ruleta.style.transform = `rotate(${anguloFinal}deg)`;
     
     setTimeout(() => {
       const premio = premios[premioIndex];
       const codigo = generarCodigo();
       
-      cupones.push({
-        nombre: premio.texto,
-        codigo: codigo
-      });
+      cupones.push({ nombre: premio.texto, codigo: codigo });
       
       document.getElementById('premioGanado').style.display = 'block';
-      document.getElementById('premioGanado').innerHTML = `¡Ganaste: <strong>${premio.texto}</strong>!<br><small>Código: ${codigo}</small>`;
+      document.getElementById('premioGanado').innerHTML = `
+        ¡Ganaste: <strong>${premio.texto}</strong>!<br>
+        <small>Código: ${codigo}</small>
+      `;
       
       document.getElementById('btnInicio').style.display = 'inline-block';
       btn.textContent = 'Premio obtenido';
       ruletaUsada = true;
-    }, 4200);
+    }, 4300);
   }
 
   function actualizarInicio() {
     const cards = document.getElementById('homeCards');
-    
-    if (adopcionFinalizada || actual.length > 0) {
+    if (actual.length > 0 || solicitudes.length > 0 || cupones.length > 0) {
       cards.style.display = 'flex';
       
       // Cupones
       document.getElementById('cuponesBadge').textContent = cupones.length;
-      const listaCupones = document.getElementById('listaCupones');
+      const listaC = document.getElementById('listaCupones');
       if (cupones.length === 0) {
-        listaCupones.innerHTML = '<p style="font-size:13px;color:var(--gris-texto);">Aún no tienes cupones</p>';
+        listaC.innerHTML = '<p style="font-size:13px;color:var(--gris-texto)">Aún no tienes cupones</p>';
       } else {
-        listaCupones.innerHTML = cupones.map(c => `
+        listaC.innerHTML = cupones.map(c => `
           <div class="cupon">
             <div class="cupon-info">
               <strong>${c.nombre}</strong>
-              <span style="font-size:11px;color:var(--gris-texto);">Válido 30 días</span>
+              <span style="font-size:11px;color:var(--gris-texto)">Válido 30 días</span>
             </div>
             <div class="codigo">${c.codigo}</div>
           </div>
         `).join('');
       }
       
-      // Solicitud
-      if (adopcionFinalizada && mascotaAdoptada) {
-        document.getElementById('solicitudTitulo').textContent = `Adopción de ${mascotaAdoptada.n}`;
-        document.getElementById('solicitudDesc').textContent = 'Solicitud en revisión por la fundación';
-        document.getElementById('solicitudBadge').className = 'badge amarillo';
-        document.getElementById('solicitudBadge').textContent = 'En revisión';
-      } else {
-        document.getElementById('solicitudTitulo').textContent = 'Sin solicitud activa';
-        document.getElementById('solicitudDesc').textContent = 'Completa el proceso de adopción';
-        document.getElementById('solicitudBadge').className = 'badge';
-        document.getElementById('solicitudBadge').textContent = '—';
+      // Resumen solicitud
+      if (solicitudes.length > 0) {
+        document.getElementById('solicitudResumen').textContent = 
+          `${solicitudes.length} solicitud(es) en proceso`;
       }
       
-      // Matches guardados
+      // Matches
       document.getElementById('matchesBadge').textContent = actual.length;
       const mini = document.getElementById('matchesMini');
       if (actual.length === 0) {
-        mini.innerHTML = '<p style="font-size:13px;color:var(--gris-texto);">Aún no tienes matches</p>';
+        mini.innerHTML = '<p style="font-size:13px;color:var(--gris-texto)">Aún no tienes matches</p>';
       } else {
-        mini.innerHTML = actual.slice(0, 5).map(p => `
+        mini.innerHTML = actual.slice(0,5).map(p => `
           <div class="match-item">
             <img src="${p.i}" alt="${p.n}">
             <span>${p.n}</span>
@@ -781,8 +702,46 @@
     }
   }
 
-  function contacto() {
-    alert('Nos contactaremos contigo pronto');
+  function mostrarSolicitudes() {
+    const cont = document.getElementById('listaSolicitudes');
+    
+    if (solicitudes.length === 0) {
+      cont.innerHTML = '<p style="text-align:center;color:var(--gris-texto);margin-top:40px;">Aún no tienes solicitudes de adopción</p>';
+      return;
+    }
+    
+    cont.innerHTML = solicitudes.map(s => {
+      const estados = ['', 'Match', 'Contacto', 'Visita', 'Adopción'];
+      return `
+        <div class="solicitud-item">
+          <div class="solicitud-top">
+            <img src="${s.i}" alt="${s.n}">
+            <div class="solicitud-info">
+              <h4>${s.n}</h4>
+              <p>${s.e} · ${s.s} · ${s.f}</p>
+            </div>
+          </div>
+          <div class="mini-steps">
+            <div class="mini-step ${s.estado >= 1 ? 'done' : ''} ${s.estado === 1 ? 'current' : ''}">
+              <div class="dot2">${s.estado > 1 ? '✓' : '1'}</div>
+              Match
+            </div>
+            <div class="mini-step ${s.estado >= 2 ? 'done' : ''} ${s.estado === 2 ? 'current' : ''}">
+              <div class="dot2">${s.estado > 2 ? '✓' : '2'}</div>
+              Contacto
+            </div>
+            <div class="mini-step ${s.estado >= 3 ? 'done' : ''} ${s.estado === 3 ? 'current' : ''}">
+              <div class="dot2">${s.estado > 3 ? '✓' : '3'}</div>
+              Visita
+            </div>
+            <div class="mini-step ${s.estado >= 4 ? 'done' : ''} ${s.estado === 4 ? 'current' : ''}">
+              <div class="dot2">${s.estado > 4 ? '✓' : '4'}</div>
+              Adopción
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 </script>
 </body>
